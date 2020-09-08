@@ -1,0 +1,10 @@
+.df {
+    display:flex;
+    flex-direction: column;
+    align-items:space-between;
+    margin-left: 24px;
+    font-family: Roboto;
+    padding-top:8px;
+    height: 100px;
+    width: 100px;
+}

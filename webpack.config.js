@@ -9,6 +9,11 @@ const BabelRuler = {
 }
 
 
+const SVGRuler = {
+    test: /\.svg$/,
+    use: ['@svgr/webpack'],
+}
+
 module.exports = {
     entry: './src/index.js',
     output: {
@@ -20,6 +25,6 @@ module.exports = {
         port: "3000"
     },
     module: {
-    rules: [BabelRuler]
-  }
+        rules: [BabelRuler, SVGRuler]
+    }
 };

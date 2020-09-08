@@ -1,17 +1,17 @@
-import React from "react"
-import Styled from "styled-components"
+import React from "react";
+import Styled from "styled-components";
+
+import AppContainer from "./components/utils/Container";
+import Home from "./components/page/public/Home"
 
 
-const ButtonMain=Styled.button`
-    background:aqua;
-`
 
-export default function App(){
+
+ 
+export default function App (){
     return(
-        <div>
-            <h1>Hola mundo, soy Junior  </h1> 
-            <h2>Junior es el mas guapo ds</h2>
-            <ButtonMain>Main</ButtonMain>
-        </div>
+        <AppContainer background="aqua" height="auto">
+            <Home/>
+        </AppContainer>
     )
-}
+};
