@@ -10,7 +10,7 @@ import Home from "./components/page/public/Home"
  
 export default function App (){
     return(
-        <AppContainer background="aqua" height="auto">
+        <AppContainer>
             <Home/>
         </AppContainer>
     )
