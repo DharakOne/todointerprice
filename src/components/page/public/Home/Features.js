@@ -20,6 +20,8 @@ const Title = Styled.label`
     font-size: 36px;
     line-height: 42px;
     font-style: normal;
+    text-align: center;
+
 `
 
 const ReasonsContainer = Styled(Container)`

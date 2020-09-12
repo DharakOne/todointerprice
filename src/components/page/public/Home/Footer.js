@@ -64,9 +64,9 @@ export default function Footer() {
             <FooterBrand />
             <Contenedor>
                 <Title>
-                    Contactenos
+                    Contact us
                 </Title>
-                <SubTitle>Servicio al cliente</SubTitle>
+                <SubTitle>Client Service</SubTitle>
                 <Typography>
                     <IconStyle>
                         <IconWhatsapp />
@@ -74,20 +74,20 @@ export default function Footer() {
                     <IconStyle>
                         <IconPhone />
                     </IconStyle>
-
                     504+ 9465-5634
-                    </Typography>
+                </Typography>
+                
                 <Typography>
                     <IconStyle><IconEmail /></IconStyle>
-                    storejunior@gmail.com
+                    todointerprice@todo.com
                     </Typography>
-                <SubTitle>Horario de atencion</SubTitle>
+                <SubTitle>Hours of Operation</SubTitle>
                 <Typography>
-                    Lunes a Sabado  de 8:00 am  a 6:00 pm
+                    Monday to Saturday  of 8:00 am  to 6:00 pm
                 </Typography>
             </Contenedor>
             <Contenedor>
-                <Title>Siguenos en las redes sociales</Title>
+                <Title>Follow us in Social Network</Title>
                 <IconCont>
                     <IconFacebook />
                     <IconInstagram />
@@ -96,16 +96,22 @@ export default function Footer() {
             </Contenedor>
             <Contenedor>
                 <Title>
-                    Enlaces de interes
+                    Links of interest
                     </Title>
                 <SubTitle>
-                    <Link href="/PreguntasFrecuentes" >Preguntas Frecuentes</Link>
+                    <Link href="/PreguntasFrecuentes" >Who are us?</Link>
                 </SubTitle>
                 <SubTitle>
-                    <Link href="/PoliticasDeDevolucion" >Politicas de devolucion</Link>
+                    <Link href="/PoliticasDeDevolucion" >Frequent questions</Link>
                 </SubTitle>
                 <SubTitle>
-                    <Link href="/QuieneSomos">Quienes  somos?</Link>
+                    <Link href="/QuieneSomos">Privacy policy</Link>
+                </SubTitle>
+                <SubTitle>
+                    <Link href="/QuieneSomos">Terms</Link>
+                </SubTitle>
+                <SubTitle>
+                    <Link href="/QuieneSomos">Repository</Link>
                 </SubTitle>
 
             </Contenedor>
