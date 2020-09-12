@@ -14,6 +14,16 @@ const SVGRuler = {
     use: ['@svgr/webpack'],
 }
 
+
+const ImageRuler = {
+    test: /\.(png|jpe?g|gif)$/i,
+    loader: 'file-loader',
+    options: {
+        outputPath: 'assets/images',
+    }
+}
+
+
 module.exports = {
     entry: './src/index.js',
     output: {
@@ -25,6 +35,6 @@ module.exports = {
         port: "3000"
     },
     module: {
-        rules: [BabelRuler, SVGRuler]
+        rules: [BabelRuler, SVGRuler,ImageRuler]
     }
 };

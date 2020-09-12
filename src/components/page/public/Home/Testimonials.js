@@ -5,12 +5,12 @@ import ArrowLeft from "./Icons/ArrowLeft.svg"
 import ArrowRight from "./Icons/ArrowRight.svg"
 
 import Container from "../../../utils/Container"
-
+import Image from "../../../../assets/image.png"
 
 const TestimonialsContainer = Styled(Container)`
-    width: 1287px;
-    margin:0 auto 109px;
+    margin:0 20px 109px;
     align-items:center;
+    width:auto;
 `
 const Title = Styled.label`
     font-family: Roboto;
@@ -24,7 +24,7 @@ const Title = Styled.label`
 
 const TestimonyContent = Styled.div`
     display:grid;
-    grid-template-columns:  auto auto auto;
+    grid-template-columns:  auto auto auto auto;
     align-items: center;
 
 `
@@ -32,7 +32,7 @@ const TestimonyContent = Styled.div`
 const TestimonyParagraphContainer = Styled.div`
     background: #EEEEEE;
     border-radius: 30px;
-    width: 812px;
+    max-width: 812px;
     padding:21px 41px;;
 `
 
@@ -47,8 +47,48 @@ const TestimonyParagraph = Styled.label`
 `
 
 
-const IconsStyle=Styled.div`
-    margin:${props=>props.margin};
+const IconsStyle = Styled.div`
+    margin:${props => props.margin};
+`
+
+const UserContainer = Styled.div`
+    width: 166px;
+    height: 196px;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    margin-right:39px;
+
+`
+
+const FotoContainer = Styled.div`
+    background: #F4F4F4;
+    width: 110px;
+    height: 110px
+
+    background: #EFEFEF;
+    border-radius: 53px;
+    text-align: center;
+`
+
+const UserName = Styled.label`
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+`
+
+const UserJob = Styled.label`
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    
+    color: #9E9E9E;
+    font-style: normal;
 `
 
 export default function Testimonials() {
@@ -56,7 +96,14 @@ export default function Testimonials() {
         <TestimonialsContainer>
             <Title>JUST SOME OF THE TESTIMONIALS.</Title>
             <TestimonyContent>
-                <IconsStyle margin="0 22px 0 0"> <ArrowLeft/></IconsStyle>
+                <IconsStyle margin="0 22px 0 0"> <ArrowLeft /></IconsStyle>
+                <UserContainer>
+                    <FotoContainer>
+                        <img src={Image} alt="assd"></img>
+                    </FotoContainer>
+                    <UserName>Junior Castro</UserName>
+                    <UserJob>Manager IBMM</UserJob>
+                </UserContainer>
                 <TestimonyParagraphContainer>
                     <TestimonyParagraph>
                         “Lorem ipsum dolor sit amet, consecteturadipiscing elit, sed eiusmod
@@ -66,7 +113,7 @@ export default function Testimonials() {
                         esse cillum dolore eu fugiat nulla pariatur.”
                 </TestimonyParagraph>
                 </TestimonyParagraphContainer>
-                <IconsStyle margin="0 0 0 22px"> <ArrowRight/></IconsStyle>
+                <IconsStyle margin="0 0 0 22px"> <ArrowRight /></IconsStyle>
             </TestimonyContent>
         </TestimonialsContainer>
     )

@@ -68,6 +68,8 @@ const ParagraphReason = Styled.div`
     margin: 0 20px 0;
 `
 
+
+
 export default function Features() {
     return (
         <FeaturesContainer>
