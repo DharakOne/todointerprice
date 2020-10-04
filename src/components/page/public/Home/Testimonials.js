@@ -1,16 +1,28 @@
-import React from "react"
-import Styled from "styled-components"
+import React, { useState } from "react"
+import Styled, { keyframes } from "styled-components"
+
+import Container from "../../../utils/Container"
+import TestimonialUser from "./TestimonialUser"
 
 import ArrowLeft from "./Icons/ArrowLeft.svg"
 import ArrowRight from "./Icons/ArrowRight.svg"
 
-import Container from "../../../utils/Container"
-import Image from "../../../../assets/image.png"
+const animationSlider = (position) => keyframes`
+        0% {
+            left: ${position.initial}% ;
+        }
+
+        100% {
+            left:${position.end}% ;
+        }
+    }
+`
 
 const TestimonialsContainer = Styled(Container)`
     margin:0 20px 109px;
     align-items:center;
     width:auto;
+
 `
 const Title = Styled.label`
     font-family: Roboto;
@@ -19,101 +31,101 @@ const Title = Styled.label`
     line-height: 28px;
     color: #818181;
     font-style: normal;
-    margin-bottom:41px;
+    text-align: center;
+    margin-bottom: 40px;
+`
+const CarrouserContainer = Styled.div`
+    overflow:hidden;
+    width:100%;
+    @media (max-width: 582px) {
+    grid-row:1;
+    grid-column:1/3;
+    }
+`
+
+const AnimationContainer = Styled.div`
+    position: relative;
+    display:flex;
+    animation-name: ${props => props.active ? animationSlider(props.position) : "none"};
+    animation-duration: 1.5s;
+    animation-iteration-count:1;
+    animation-fill-mode: both;
+   
 `
 
 const TestimonyContent = Styled.div`
     display:grid;
-    grid-template-columns:  auto auto auto auto;
+    grid-template-columns:  auto auto auto;
     align-items: center;
 
+    @media (max-width: 582px) {
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto;
+        justify-items:center;
+    }
+
 `
-
-const TestimonyParagraphContainer = Styled.div`
-    background: #EEEEEE;
-    border-radius: 30px;
-    max-width: 812px;
-    padding:21px 41px;;
-`
-
-const TestimonyParagraph = Styled.label`
-    font-family: Roboto;
-    font-style: italic;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 28px;
-
-    color: #626262;
-`
-
-
 const IconsStyle = Styled.div`
     margin:${props => props.margin};
-`
+    @media (max-width: 582px) {
+        margin:0;
+    }
 
-const UserContainer = Styled.div`
-    width: 166px;
-    height: 196px;
-    display:flex;
-    flex-direction:column;
-    align-items: center;
-    margin-right:39px;
-
-`
-
-const FotoContainer = Styled.div`
-    background: #F4F4F4;
-    width: 110px;
-    height: 110px
-
-    background: #EFEFEF;
-    border-radius: 53px;
-    text-align: center;
-`
-
-const UserName = Styled.label`
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 28px;
-    text-align: center;
-`
-
-const UserJob = Styled.label`
-    font-family: Roboto;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 28px;
-    text-align: center;
-    
-    color: #9E9E9E;
-    font-style: normal;
 `
 
 export default function Testimonials() {
+    const [position, setPosition] = useState({
+        initial: 0,
+        end: -100,
+        int: 0
+    })
+    const [active, setActive] = useState(false)
+    function handleAnimation(name) {
+        if (name === "right") {
+            if (position.int < 2) {
+                if (active === false) {
+                    setActive(true)
+                    setPosition({
+                        initial: 0,
+                        end: -100,
+                        int: 1
+                    })
+                } else {
+                    setPosition({
+                        initial: position.end,
+                        end: position.end - 100,
+                        int: position.int + 1
+                    })
+                }
+
+            }
+
+        }
+        else {
+            if (position.int > 0) {
+                setActive(true)
+                setPosition({
+                    initial: position.end,
+                    end: position.end + 100,
+                    int: position.int - 1
+                })
+            }
+
+        }
+    }
     return (
         <TestimonialsContainer>
             <Title>JUST SOME OF THE TESTIMONIALS.</Title>
             <TestimonyContent>
-                <IconsStyle margin="0 22px 0 0"> <ArrowLeft /></IconsStyle>
-                <UserContainer>
-                    <FotoContainer>
-                        <img src={Image} alt="assd"></img>
-                    </FotoContainer>
-                    <UserName>Junior Castro</UserName>
-                    <UserJob>Manager IBMM</UserJob>
-                </UserContainer>
-                <TestimonyParagraphContainer>
-                    <TestimonyParagraph>
-                        “Lorem ipsum dolor sit amet, consecteturadipiscing elit, sed eiusmod
-                        temporincidunt ut labore et dolore magna aliqua.Ut enim ad minim
-                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex
-                        ea commodi consequat. Quis aute iure reprehenderit in voluptate velit
-                        esse cillum dolore eu fugiat nulla pariatur.”
-                </TestimonyParagraph>
-                </TestimonyParagraphContainer>
-                <IconsStyle margin="0 0 0 22px"> <ArrowRight /></IconsStyle>
+                <IconsStyle margin="0 22px 0 0"> <ArrowLeft onClick={() => handleAnimation("left")} /></IconsStyle>
+                <CarrouserContainer>
+                    <AnimationContainer active={active} position={position}>
+                        <TestimonialUser name="Junior Castro" background="#EEEEEE" />
+                        <TestimonialUser name="Benjamin Flores" background="aqua" />
+                        <TestimonialUser name="Flores Castro" background="greenyellow" />
+                    </AnimationContainer>
+                </CarrouserContainer>
+                <IconsStyle margin="0 0 0 22px"> <ArrowRight onClick={() => handleAnimation("right")} /></IconsStyle>
             </TestimonyContent>
         </TestimonialsContainer>
     )

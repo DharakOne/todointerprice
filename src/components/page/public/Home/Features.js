@@ -1,6 +1,5 @@
 import React from 'react'
 import Styled from 'styled-components'
-
 import Container from "../../../utils/Container"
 
 import PersonIcon from "./Icons/Person.svg"
@@ -21,6 +20,10 @@ const Title = Styled.label`
     line-height: 42px;
     font-style: normal;
     text-align: center;
+    @media (max-width: 800px) {
+        margin-bottom:0;
+        margin:0 5% 41px;
+    }
 
 `
 
@@ -30,15 +33,18 @@ const ReasonsContainer = Styled(Container)`
     grid-template-columns: repeat(4,auto);
     margin:40px auto 0;
     justify-items: center;
-    @media (max-width: 1260px) {
+    @media (max-width: 1080px) {
         grid-template-columns:auto auto;
         grid-gap:20px;
+    }
+    @media (max-width: 600px) {
+        grid-template-columns:auto;
     }
 `
 const Reason = Styled.div`
     flex-direction:row;
-    width:300px;
-    height:428px;
+    width:250px;
+    height:420px;
     background:white;
     margin:0 6.5px 0;
     background:white;
@@ -55,7 +61,7 @@ const TitleReason = Styled.label`
     line-height: 42px;
     font-style: normal;
     text-align: center;
-    margin: 31px 0;
+    margin: 15px 0;
 `
 
 const ParagraphReason = Styled.div`

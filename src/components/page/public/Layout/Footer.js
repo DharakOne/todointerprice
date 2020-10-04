@@ -11,7 +11,7 @@ import IconTwitter from "./Icons/Twitter.svg"
 import IconPhone from "./Icons/Phone.svg"
 
 
-
+ 
 
 const FooterCont = Styled.div`
     display:grid;
@@ -39,8 +39,7 @@ const SubTitle = Styled.h2`
     color:rgb(36, 36, 36);
 `
 const Typography = Styled.div`
-    display:flex;
-    align-items: center;
+    text-aling:center;
 `
 const Link = Styled.a`
     text-decoration:none;

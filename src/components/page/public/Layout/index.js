@@ -2,7 +2,7 @@ import React from "react"
 import Styled from "styled-components"
 
 import LayoutContainer from "../../../utils/Container"
-import AppBar from "../Home/AppBar"
+import AppBar from "./AppBar"
 
 
 

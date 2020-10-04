@@ -5,7 +5,7 @@ import HomeContainer from "../../../utils/Container"
 import Header from "./Header"
 import Features from "./Features"
 import Testimonials from "./Testimonials"
-import Footer from "./Footer"
+import Footer from "../Layout/Footer"
 
 
 export default function Home() {
