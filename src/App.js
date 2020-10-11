@@ -16,7 +16,7 @@ export default function App() {
         <AppContainer>
             <Switch>
                 <Route path="/SingIn">
-                    <SingIn></SingIn>
+                    <SingIn/>
                 </Route>
                 <Route path="/">
                     <Home />
