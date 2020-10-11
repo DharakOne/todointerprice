@@ -4,24 +4,19 @@ import Styled from "styled-components"
 import {
     AppBarContainer,
     LinkContainer,
-    BrandConteiner,
-    LinkBrand,
     Link
 } from "../Layout/AppBarStyle"
+import Brand from "../Layout/Brand"
 
 import Container from "../../../utils/Container"
 import IconStyle from "../../../utils/IconStyle"
-import Logo from "./Logo.svg"
 
 
 
 export default function Appbar() {
     return (
         <AppBarContainer>
-            <BrandConteiner>
-                <Logo />
-                <LinkBrand to="/">TODO</LinkBrand>
-            </BrandConteiner>
+            <Brand/>
             <LinkContainer >
                 <Link to="/SingUp" >Sing Up</Link>
                 <Link to="/About" >About</Link>

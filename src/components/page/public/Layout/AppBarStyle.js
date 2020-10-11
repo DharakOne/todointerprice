@@ -22,7 +22,6 @@ export const AppBarContainer = Styled(Container)`
     }
 `
 
-
 export const LinkBrand = Styled(LinkRouter)`
     font-family: Roboto;
     font-style: normal;
@@ -31,8 +30,8 @@ export const LinkBrand = Styled(LinkRouter)`
     line-height: 42px;
     color: #FFFFFF;
     text-decoration:none;
-
 `
+
 export const LinkContainer = Styled.div`
     display:grid;
     column-gap: 25px;
