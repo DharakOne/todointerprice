@@ -5,7 +5,7 @@ import {
     AppBarContainer,
     LinkContainer,
     Link
-} from "../Layout/AppBarStyle"
+} from "./AppBarStyle"
 import Brand from "../Layout/Brand"
 
 import Container from "../../../utils/Container"

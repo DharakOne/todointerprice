@@ -6,27 +6,19 @@ import {Link as LinkRouter} from  "react-router-dom"
 import Container from "../../../utils/Container"
  
 export const AppBarContainer = Styled(Container)`
-    flex-direction:row;
-    width:96%;
-    background: radial-gradient(50% 50% at 50% 50%, #717EF2 0%, #5E6EFF 100%);
+    margin-top:46px;
+    margin-left:32px;
+    margin-right:46px;
+    width:auto;
     justify-content:space-between;
-    align-items:center;
-    height:80px;
-    padding:0 2%;
-    @media (max-width: 500px) {
-        flex-direction:column;
-        height:auto;
-        padding-bottom:20px;
-        padding-top:15px;
-    }
-`
+    flex-direction:row;
+    @media (max-width: 440px) {
+        display:grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+        justify-content: center;
+        row-gap: 10px;
 
-export const MLinkContainer = Styled.div`
-    display:flex;
-    column-gap: 25px;
-    grid-template-columns: auto auto;
-    @media (max-width: 500px) {
-        flex-direction:column;
     }
 `
 
@@ -46,7 +38,11 @@ export const LinkContainer = Styled.div`
     grid-template-columns: auto auto;
     
 `
-
+export const BrandConteiner = Styled.div`
+    display:grid;
+    column-gap: 10px;
+    grid-template-columns: auto auto;
+`
 export const Link = Styled(LinkRouter)`
     font-family: Roboto;
     font-style: normal;

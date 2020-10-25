@@ -22,6 +22,10 @@ const ImageRuler = {
         outputPath: 'assets/images',
     }
 }
+const CSSRuler = {
+    test: /\.css$/i,
+    use: ['style-loader', 'css-loader'],
+}
 
 
 module.exports = {
@@ -35,6 +39,6 @@ module.exports = {
         port: "3000"
     },
     module: {
-        rules: [BabelRuler, SVGRuler,ImageRuler]
+        rules: [BabelRuler, SVGRuler, ImageRuler,CSSRuler]
     }
 };

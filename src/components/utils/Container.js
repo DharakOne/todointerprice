@@ -8,4 +8,4 @@ const Container = Styled.div`
     flex-direction:${(props)=>props.direction ? props.direction : "column"};
 `;
 
-export default Container; 
+export default Container;  
