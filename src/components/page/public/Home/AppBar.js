@@ -18,8 +18,8 @@ export default function Appbar() {
         <AppBarContainer>
             <Brand/>
             <LinkContainer >
-                <Link to="/SingUp" >Sing Up</Link>
-                <Link to="/About" >About</Link>
+                <Link to="/PageExample/SingUp" >Sing Up</Link>
+                <Link to="/PageExample/About" >About</Link>
             </LinkContainer>
         </AppBarContainer>
     )

@@ -21,7 +21,7 @@ export const AppBarContainer = Styled(Container)`
     }
 `
 
-export const MLinkContainer = Styled.div`
+export const LinkContainer = Styled.div`
     display:flex;
     column-gap: 25px;
     grid-template-columns: auto auto;
@@ -40,12 +40,6 @@ export const LinkBrand = Styled(LinkRouter)`
     text-decoration:none;
 `
 
-export const LinkContainer = Styled.div`
-    display:grid;
-    column-gap: 25px;
-    grid-template-columns: auto auto;
-    
-`
 
 export const Link = Styled(LinkRouter)`
     font-family: Roboto;

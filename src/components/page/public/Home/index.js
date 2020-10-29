@@ -13,7 +13,7 @@ export default function Home() {
         <HomeContainer direction="column">
             <Header />
             <Features />
-            <Testimonials/>
+            <Testimonials />
             <Footer />
         </HomeContainer>
 

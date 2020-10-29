@@ -1,4 +1,5 @@
 import React from "react"
+import {Link as RouterLink}  from "react-router-dom"
 import Styled from "styled-components"
 import FooterBrand from "./FooterBrand"
 
@@ -41,7 +42,7 @@ const SubTitle = Styled.h2`
 const Typography = Styled.div`
     text-aling:center;
 `
-const Link = Styled.a`
+const Link = Styled(RouterLink)`
     text-decoration:none;
     color:rgb(64, 115, 255);
 `
@@ -98,19 +99,19 @@ export default function Footer() {
                     Links of interest
                     </Title>
                 <SubTitle>
-                    <Link href="/PreguntasFrecuentes" >Who are us?</Link>
+                    <Link to="/PageExample/Who are us?" >Who are us?</Link>
                 </SubTitle>
                 <SubTitle>
-                    <Link href="/PoliticasDeDevolucion" >Frequent questions</Link>
+                    <Link to="/PageExample/Frequent questions" >Frequent questions</Link>
                 </SubTitle>
                 <SubTitle>
-                    <Link href="/QuieneSomos">Privacy policy</Link>
+                    <Link to="/PageExample/Privacy polic">Privacy policy</Link>
                 </SubTitle>
                 <SubTitle>
-                    <Link href="/QuieneSomos">Terms</Link>
+                    <Link to="/PageExample/Terms">Terms</Link>
                 </SubTitle>
                 <SubTitle>
-                    <Link href="/QuieneSomos">Repository</Link>
+                    <a href="https://github.com/DharakOne/todointerprice">Repository</a>
                 </SubTitle>
 
             </Contenedor>
