@@ -70,7 +70,7 @@ const IconsStyle = Styled.div`
     @media (max-width: 582px) {
         margin:0;
     }
-
+    cursor: pointer;
 `
 
 export default function Testimonials() {

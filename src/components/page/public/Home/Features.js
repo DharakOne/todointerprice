@@ -11,7 +11,7 @@ import GraphicIcon from "./Icons/Graphic.svg"
 
 const FeaturesContainer = Styled(Container)`
     width:auto;
-    margin:32px auto 103px;
+    margin:32px auto 93px;
 `
 const Title = Styled.label`
     font-family: Roboto;
@@ -44,7 +44,7 @@ const ReasonsContainer = Styled(Container)`
 const Reason = Styled.div`
     flex-direction:row;
     width:250px;
-    height:420px;
+    height:450px;
     background:white;
     margin:0 6.5px 0;
     background:white;

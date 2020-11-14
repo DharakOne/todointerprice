@@ -8,6 +8,8 @@ import Home from "./components/page/public/Home"
 import SingIn from "./components/page/public/SingIn"
 import PageExample from "./components/page/public/PageExample"
 import Layout from "./components/page/public/Layout"
+import SingUp from "./components/page/public/SingUp"
+
 
 
 
@@ -18,6 +20,9 @@ export default function App() {
             <Switch>
                 <Route path="/SingIn">
                     <SingIn/>
+                </Route>
+                <Route path="/SingUp">
+                    <SingUp/>
                 </Route>
                 <Route path="/PageExample/:id">
                     <Layout><PageExample/></Layout>

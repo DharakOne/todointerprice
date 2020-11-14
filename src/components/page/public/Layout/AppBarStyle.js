@@ -13,7 +13,7 @@ export const AppBarContainer = Styled(Container)`
     align-items:center;
     height:80px;
     padding:0 2%;
-    @media (max-width: 500px) {
+    @media (max-width: 560px) {
         flex-direction:column;
         height:auto;
         padding-bottom:20px;

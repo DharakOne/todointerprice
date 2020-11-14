@@ -35,12 +35,17 @@ const Title = Styled.h1`
     white-space: normal; 
     text-align:center;
     color:rgb(36, 36, 36);
+    font-family: Roboto;
+    font-weight: 700;
 `
 const SubTitle = Styled.h2`
     color:rgb(36, 36, 36);
+    font-family: Roboto;
+    font-weight: 500;
 `
 const Typography = Styled.div`
     text-aling:center;
+    font-family: Roboto;
 `
 const Link = Styled(RouterLink)`
     text-decoration:none;
@@ -99,7 +104,7 @@ export default function Footer() {
                     Links of interest
                     </Title>
                 <SubTitle>
-                    <Link to="/PageExample/Who are us?" >Who are us?</Link>
+                    <Link to="/PageExample/Who are us%3F" >Who are us?</Link>
                 </SubTitle>
                 <SubTitle>
                     <Link to="/PageExample/Frequent questions" >Frequent questions</Link>
