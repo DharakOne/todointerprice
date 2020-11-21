@@ -1,14 +1,14 @@
-import React  from "react";
-import Styled from "styled-components";
+import React  from "react"
+import Styled from "styled-components"
 import { Switch, Route } from "react-router-dom"
 
 
-import AppContainer from "./components/utils/Container";
+import AppContainer from "./components/utils/Container"
 import Home from "./components/page/public/Home"
 import SingIn from "./components/page/public/SingIn"
 import PageExample from "./components/page/public/PageExample"
-import Layout from "./components/page/public/Layout"
 import SingUp from "./components/page/public/SingUp"
+import Price from "./components/page/public/Price"
 
 
 
@@ -24,8 +24,11 @@ export default function App() {
                 <Route path="/SingUp">
                     <SingUp/>
                 </Route>
-                <Route path="/PageExample/:id">
-                    <Layout><PageExample/></Layout>
+                <Route path="/Price">
+                    <Price/>
+                </Route>
+                <Route path="/PageExample/:id"> 
+                    <PageExample/>
                 </Route>
                 <Route path="/">
                     <Home />
