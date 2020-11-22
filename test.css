@@ -10,4 +10,7 @@
     width: 100px;
     margin-bottom: 40px;
     padding: 60px;
+    grid-template-columns: auto auto auto auto;
+    grid-row: 12px;
+    grid-column: 12px;
 }

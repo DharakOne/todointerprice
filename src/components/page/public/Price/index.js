@@ -1,12 +1,17 @@
 import React from "react"
-import Layout from "../Layout"
-import { ContainerPrice, ConteinerTitle, Tittle, ContainerSwitchPrice, SwitchPrice, PriceLeft, PriceRight,Offer } from "./StylePrice"
 
+import Layout from "../Layout"
+import {
+    ContainerPrice, ConteinerTitle, Tittle, ContainerSwitchPrice,
+    SwitchPrice, PriceLeft, PriceRight, Offer, CardContainer
+} from "./StylePrice"
+import CardPrice from "./CardPrice"
 
 export default function Price() {
     return (
-        <ContainerPrice>
-            <Layout>
+        <Layout>
+            <ContainerPrice>
+
                 <ConteinerTitle>
                     <Tittle>
                         Our Plans
@@ -18,14 +23,20 @@ export default function Price() {
                             Monthly Billing
                         </PriceLeft>
                         <PriceRight>
-                            Annual Billing 
+                            Annual Billing
                             <Offer>
                                 Save 20%
                             </Offer>
                         </PriceRight>
                     </SwitchPrice>
                 </ContainerSwitchPrice>
-            </Layout>
-        </ContainerPrice>
+                <CardContainer>
+                    <CardPrice conteiner="0" />
+                    <CardPrice conteiner="16"/>
+                    <CardPrice conteiner="64"/>
+                    <CardPrice conteiner="@"/>
+                </CardContainer>
+            </ContainerPrice>
+        </Layout>
     )
 }

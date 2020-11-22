@@ -1,9 +1,13 @@
 import Styled from "styled-components"
 import Container from "../../../utils/Container"
+import CardPrice from "./CardPrice"
 
 
 export const ContainerPrice=Styled.div`
     background: radial-gradient(37.85% 74.84% at 45.56% 45.56%, #7947B6 0%, #5E6EFF 100%);
+    display:flex;
+    flex-direction: column;
+    align-items:center;
 ` 
 
 export const ConteinerTitle=Styled.div`
@@ -78,4 +82,11 @@ export const  Offer=Styled.div`
     letter-spacing: 0.015em;
     color: #25D366;
     margin-left:12px;
+`
+
+export const CardContainer=Styled.div`
+    display:grid;
+    margin-bottom:37px;
+    grid-template-columns: auto auto auto auto;
+    column-gap:12px;
 `
