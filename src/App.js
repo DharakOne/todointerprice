@@ -1,7 +1,7 @@
 import React  from "react"
 import Styled from "styled-components"
 import { Switch, Route } from "react-router-dom"
-
+import {connect} from "react-redux"
 
 import AppContainer from "./components/utils/Container"
 import Home from "./components/page/public/Home"
@@ -13,8 +13,8 @@ import Price from "./components/page/public/Price"
 
 
 
-export default function App() {
-
+function App(props) {
+    console.log(props)
     return (
         <AppContainer>
             <Switch>
@@ -37,3 +37,9 @@ export default function App() {
         </AppContainer>
     )
 };
+
+const mapStateToProps = (state) => ({
+    user:state
+})
+
+export default connect(mapStateToProps)(App)

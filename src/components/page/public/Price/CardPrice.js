@@ -2,20 +2,27 @@ import React from "react"
 
 import {
     CardPriceContainer, Title, Description,
-    PriceContainerNumber, PriceDolar, PriceNumber, PriceMo
-} from "./CardPriceStyle"
-export default function CardPrice({conteiner}) {
+    PriceContainerNumber, PriceDolar, PriceNumber, PriceMo,
+    Requirement, FeaturesContainer, Feature
+} from "./StyleCardPrice"
+export default function CardPrice(props) {
     return (
         <CardPriceContainer>
-            <Title>FREE</Title>
+            <Title>{props.title}</Title>
             <Description>
-                Best way for Anyone to get started
+                {props.descripion}
             </Description>
             <PriceContainerNumber>
-                <PriceDolar>$</PriceDolar>
-                <PriceNumber>{conteiner}</PriceNumber>
-                <PriceMo>/mo</PriceMo>
+                <PriceDolar display={props.display} >$</PriceDolar>
+                <PriceNumber>{props.conteiner}</PriceNumber>
+                <PriceMo display={props.display}>/mo</PriceMo>
             </PriceContainerNumber>
+            <Requirement>
+                {props.requirement}
+            </Requirement>
+            <FeaturesContainer>
+                {props.features.map((feature,index) => <Feature key={index}>{feature}</Feature>)}
+            </FeaturesContainer>
         </CardPriceContainer>
     )
 }

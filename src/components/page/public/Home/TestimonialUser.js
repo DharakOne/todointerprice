@@ -1,6 +1,5 @@
 import React from "react"
 import Styled from "styled-components"
-
 import image from "../../../../assets/image.png"
 
 
