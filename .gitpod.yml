@@ -1,0 +1,12 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+
+  - command: python flasky.py
+    name: api flask server 
+
+ports:
+  - port: 5000
+    onOpen: ignore 
+    visibility: public
