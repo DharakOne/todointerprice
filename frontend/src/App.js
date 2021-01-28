@@ -1,7 +1,8 @@
-import React from "react"
-import Styled from "styled-components"
+import React, { useEffect } from "react"
 import { Switch, Route } from "react-router-dom"
 import { connect } from "react-redux"
+import axios from "axios"
+
 
 import AppContainer from "./components/utils/Container"
 import Home from "./components/page/public/Home"
@@ -15,8 +16,19 @@ import Notes from "./components/page/private/Notes"
 
 
 
-function App(props) {
-    console.log(props)
+function App() {
+    useEffect(function(){
+        async  function fetchData() {
+            try {
+                const {data} = await axios.get("")
+
+                console.log(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchData()
+    }, [])
     return (
         <AppContainer>
             <Switch>
