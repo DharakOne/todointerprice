@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import axios from "axios"
 
 import Layout from "../Layout/index"
 import {
@@ -14,23 +15,26 @@ import {
 } from "./SingInStyle"
 
 export default function SingIn() {
-    const [startDate, setStartDate] = useState(new Date());
     const [formData, formDataSet] = useState({
         email: "",
         password: "",
     })
     function catchChange(event) {
-
+        
         const data = event.target
-
         formDataSet({ ...formData, [data.name]: data.value })
 
     }
 
-    function signUser() {
-        console.log("Usuario nuevo creado")
-        console.log(formData)
-        console.log(startDate)
+    async function SignInUser() {
+        try {
+            console.log("rn accion")
+            const {data} = await axios.post("p/signin",formData)
+            localStorage.setItem(data)
+        } catch (error) {
+            console.log("A error acurred")
+            console.log(error)
+        }
     }
     return (
         <Layout>
@@ -39,15 +43,15 @@ export default function SingIn() {
                     <Title>Sing In</Title>
                     <ContentForm>
                         <InputContainer>
-                            <InputLabel>Email</InputLabel>
-                            <Input />
+                            <InputLabel >Email</InputLabel>
+                            <Input onChange={catchChange}  name="email" value={formData.email}/>
                         </InputContainer>
                         <InputContainer>
-                            <InputLabel>Password</InputLabel>
-                            <InputPassword />
+                            <InputLabel >Password</InputLabel>
+                            <InputPassword onChange={catchChange}  name="password" value={formData.password} />
                         </InputContainer>
-                        <ButtomSumit>
-                                Login
+                        <ButtomSumit onClick={()=>{SignInUser()}}>
+                            Login
                         </ButtomSumit>
                     </ContentForm>
                 </Form>

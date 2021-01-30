@@ -27,8 +27,10 @@ class Sign_in(Resource):
     def post (self):
         body = request.get_json()
 
-        user =User.query.filter_by(email=body.get('email')) 
-        user=user[0]
+        user =User.query.filter_by(email=body.get('email')).first()
+        if user==None:
+            return {"error":'Email or password invalid' }, 401
+
         authorized = user.verify_password(body.get('password'))
         if not authorized:
             return {'error': 'Email or password invalid'}, 401

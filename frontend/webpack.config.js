@@ -33,11 +33,15 @@ module.exports = {
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'build'),
+        sourceMapFilename: "[name].js.map"
     },
     devServer: {
         contentBase: path.join(__dirname, 'build'),
-        port: "4000"
+        port: "4000",
+        historyApiFallback: true,
+        https: false,
     },
+    devtool: false,
     module: {
         rules: [BabelRuler, SVGRuler, ImageRuler,CSSRuler]
     }

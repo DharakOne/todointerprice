@@ -37,8 +37,6 @@ from app.auth.index import init_auth_resourse
 
 init_auth_resourse(app)
 
-#Shell flask
-
 from utils.shell import make_shell_context
 
 @app.shell_context_processor
