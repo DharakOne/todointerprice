@@ -6,7 +6,8 @@
   "scripts": {
     "built": "webpack --mode production",
     "dev": "webpack --mode development",
-    "start": "webpack-dev-server &&   -- -- 'public $(gp url 4000 | sed 's+https://++'):443'"
+    "start":"webpack-dev-server",
+    "startg": "webpack-dev-server &&   -- -- 'public $(gp url 4000 | sed 's+https://++'):443'"
   },
   "repository": {
     "type": "git",

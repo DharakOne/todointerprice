@@ -1,14 +1,22 @@
 {
-    "python.pythonPath": "/home/gitpod/.pyenv/versions/3.8.6/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "python.linting.enabled": true,
+
+    
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "__pycache__": true,
-        "__init__.py": true,
+        "**/__pycache__": true,
+        "**/__init__.py": true,
         "node_modules": true,
         ".theia":true
-    }
-}
+    },
+    "git.ignoreLimitWarning": true,
+    "python.linting.pylintEnabled": true,
+    "python.envFile": "${workspaceFolder}/app/.env"
+
+} 
