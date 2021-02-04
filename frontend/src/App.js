@@ -6,9 +6,9 @@ import axios from "axios"
 
 import AppContainer from "./components/utils/Container"
 import Home from "./components/page/public/Home"
-import SingIn from "./components/page/public/SingIn"
+import SignIn from "./components/page/public/SignIn"
 import PageExample from "./components/page/public/PageExample"
-import SingUp from "./components/page/public/SingUp"
+import SignUp from "./components/page/public/SignUp"
 import Price from "./components/page/public/Price"
 import Notes from "./components/page/private/Notes"
 
@@ -33,10 +33,10 @@ function App() {
         <AppContainer>
             <Switch>
                 <Route path="/SingIn">
-                    <SingIn />
+                    <SignIn />
                 </Route>
                 <Route path="/SingUp">
-                    <SingUp />
+                    <SignUp />
                 </Route>
                 <Route path="/Price">
                     <Price />

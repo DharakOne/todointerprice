@@ -10,3 +10,4 @@ Role.query.all()
 User.query.all()
 db.drop_all()
 db.create_all() 
+#junior@gmail.com

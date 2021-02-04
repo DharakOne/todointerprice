@@ -1,5 +1,4 @@
 import Styled from "styled-components"
-import Container from "../../../utils/Container"
 
 
 export const ContainerSingIn = Styled.div`
@@ -39,12 +38,11 @@ export const InputContainer=Styled.div`
     display:grid;
     grid-template-rows: auto auto;
     grid-row-gap: 15px;
-    
 `
 
-export const InputPassword = Styled.input.attrs(props => ({
+export const InputPassword = Styled.input.attrs({
     type: 'password',
-}))`
+})`
     width:100%;
     background: #EFEFEF;
     border: 1px solid #E5E5E5;
@@ -65,7 +63,9 @@ export const InputLabel=Styled.label`
     
 `
 
-export const ButtomSumit=Styled.div`
+export const ButtomSumit=Styled.div.attrs({
+    type: 'submit',
+})`
     color:black;
     text-decoration: none;    
     padding: 10px 20px 10px;
@@ -75,4 +75,11 @@ export const ButtomSumit=Styled.div`
     font-weight: bold;   
     margin: 20px 0 10px;
     cursor: pointer;
+`
+
+export const BlockErrorContainer=Styled.div`
+    background:rgb(255, 143, 143);
+    color:rgb(231, 34, 34);
+    padding:3px;
+    font-weight: bold;   
 `
