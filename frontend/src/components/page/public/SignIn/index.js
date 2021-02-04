@@ -1,4 +1,5 @@
-import React, { useState,useEffect } from "react"
+import React, { useState } from "react"
+import { useHistory } from "react-router-dom"
 import axios from "axios"
 
 import Layout from "../Layout/index"
@@ -20,8 +21,9 @@ export default function SignIn() {
         email: "",
         password: "",
     })
-    const [waitAnswer,setWaitAnswer]=useState(false)
-    const [errorLogin, setErrorLogin]=useState(false)
+    const history = useHistory();
+    const [waitAnswer, setWaitAnswer] = useState(false)
+    const [errorLogin, setErrorLogin] = useState(false)
     function catchChange(event) {
         const data = event.target
         formDataSet({ ...formData, [data.name]: data.value })
@@ -29,18 +31,21 @@ export default function SignIn() {
 
 
     async function SignInHandeld(e) {
-        if (e.key == "Enter" || e=="submit" && !waitAnswer)  {
+        if (e.key == "Enter" || e == "submit" && !waitAnswer) {
             setWaitAnswer(true)
             setErrorLogin(false)
             console.log("dds")
             try {
                 const { data } = await axios.post("p/signin", formData)
-                localStorage.setItem("token",data.token)
-                setWaitAnswer(false)
+                localStorage.setItem("token", data.token)
+                await new Promise(r => setTimeout(r, 2000));
+                await  console.log(history.location)
+                history.push("/user")
             } catch (error) {
-                setErrorLogin(true)
                 console.log("A error acurred")
                 console.log(error)
+                await new Promise(r => setTimeout(r, 2000));
+                setErrorLogin(true)
                 setWaitAnswer(false)
             }
 
@@ -48,8 +53,8 @@ export default function SignIn() {
 
     }
 
-    function BlockError(){
-        if(errorLogin){
+    function BlockError() {
+        if (errorLogin) {
             return (
                 <BlockErrorContainer>
                     Please enter a password or email correct.
@@ -66,13 +71,13 @@ export default function SignIn() {
                     <ContentForm>
                         <InputContainer>
                             <InputLabel  >Email</InputLabel>
-                            <Input onKeyUp={SignInHandeld}  onChange={catchChange} name="email" value={formData.email} />
+                            <Input onKeyUp={SignInHandeld} onChange={catchChange} name="email" value={formData.email} />
                         </InputContainer>
                         <InputContainer>
                             <InputLabel >Password</InputLabel>
-                            <InputPassword onKeyUp={SignInHandeld} onChange={catchChange} name="password" value={formData.password}/>
-                            <BlockError/>
-                            <ButtomSumit onClick={()=>SignInHandeld("submit")}  >Login</ButtomSumit>
+                            <InputPassword onKeyUp={SignInHandeld} onChange={catchChange} name="password" value={formData.password} />
+                            <BlockError />
+                            <ButtomSumit onClick={() => SignInHandeld("submit")}  >Login</ButtomSumit>
                         </InputContainer>
 
                     </ContentForm>

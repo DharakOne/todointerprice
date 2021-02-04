@@ -42,6 +42,7 @@ export const InputContainer=Styled.div`
 
 export const InputPassword = Styled.input.attrs({
     type: 'password',
+    autocomplete:"current-password"
 })`
     width:100%;
     background: #EFEFEF;
@@ -50,7 +51,8 @@ export const InputPassword = Styled.input.attrs({
     box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.25);
     height: 40px;
 `
-export const Input=Styled.input`
+export const Input=Styled.input.attrs({
+    type: 'email',})`
     width:100%;
     background: #EFEFEF;
     border: 1px solid #E5E5E5;
