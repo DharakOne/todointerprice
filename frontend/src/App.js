@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Switch, Route } from "react-router-dom"
+import { Switch, Route, Redirect} from "react-router-dom"
 import { connect } from "react-redux"
 import axios from "axios"
 
@@ -47,9 +47,9 @@ function App() {
                 <Route path="/Notes">
                     <Notes />
                 </Route>
-                <Route path="/">
+                <Redirect >
                     <Home />
-                </Route>
+                </Redirect>
 
             </Switch>
         </AppContainer>

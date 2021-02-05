@@ -9,8 +9,8 @@ import "react-datepicker/dist/react-datepicker.css"
 import StoreApp from "./redux/StoreApp"
 import App from "./App"
 
-//https://3000-a8fdd359-8631-4bc6-88ab-a414bc9b7346.ws-us03.gitpod.io/
-axios.defaults.baseURL = 'http://127.0.0.1:3000/';
+//axios.defaults.baseURL = 'http://127.0.0.1:3000/';
+axios.defaults.baseURL = "https://3000-a8fdd359-8631-4bc6-88ab-a414bc9b7346.ws-us03.gitpod.io/"
 
 axios.interceptors.request.use(request => {
     const origin  = request.url;

@@ -34,12 +34,11 @@ export default function SignIn() {
         if (e.key == "Enter" || e == "submit" && !waitAnswer) {
             setWaitAnswer(true)
             setErrorLogin(false)
-            console.log("dds")
             try {
                 const { data } = await axios.post("p/signin", formData)
                 localStorage.setItem("token", data.token)
                 await new Promise(r => setTimeout(r, 2000));
-                await  console.log(history.location)
+                console.log(history.location)
                 history.push("/user")
             } catch (error) {
                 console.log("A error acurred")

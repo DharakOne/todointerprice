@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
-import Styled from "styled-components"
 
-import { LinkContainer, LinkBrand, Link, AppBarContainer } from "./AppBarStyle"
+import { LinkContainer, Link, AppBarContainer } from "./AppBarStyle"
 import Brand from "./Brand"
 
-import Container from "../../../utils/Container"
 
 
 
