@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
-    serialize_rules = ()
+    serialize_rules = ("-password_hash",)
     serialize_only = ()
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(6), unique=True, index=True)

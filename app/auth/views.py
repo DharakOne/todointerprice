@@ -2,10 +2,8 @@ from flask_restful import Resource
 from .models import User
 from app.main import db
 from flask import request
-from flask_jwt_extended import create_access_token, jwt_required
-
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 import datetime
-
 
 
 class  Sign_up(Resource):
@@ -18,10 +16,6 @@ class  Sign_up(Resource):
         db.session.add_all([new_user])
         db.session.commit()
         return {'succes': 'succefully'}
-
-
-
-
 
 class Sign_in(Resource):
     def post (self):
@@ -40,12 +34,10 @@ class Sign_in(Resource):
         return {'token': access_token}, 200
 
 class User_handled(Resource):
-
     @jwt_required
-    def post(self):
-        body=request.get_json()
-        User.objects.get(email=body.get('email'))
-        authorized = user.check_password(body.get('password'))
-        resultado= myQuery[0].to_dict()
-        return {"users":resultado}
+    def get(self):
+        user_id=get_jwt_identity()
+        my_user =User.query.filter_by(id=user_id).first()
+        print(my_user)
+        return my_user.to_dict()
         

@@ -1,63 +1,49 @@
 import React, { useEffect } from "react"
-import { Switch, Route, Redirect} from "react-router-dom"
+import { Switch } from "react-router-dom"
 import { connect } from "react-redux"
 import axios from "axios"
-
-
 import AppContainer from "./components/utils/Container"
-import Home from "./components/page/public/Home"
-import SignIn from "./components/page/public/SignIn"
-import PageExample from "./components/page/public/PageExample"
-import SignUp from "./components/page/public/SignUp"
-import Price from "./components/page/public/Price"
-import Notes from "./components/page/private/Notes"
+import configRoutes from "./config/routes"
+import RoutersComponets from "./components/utils/RoutersComponets"
+import { setUser } from "./redux/user/action"
 
 
-
-
-
-function App() {
-    useEffect(function(){
-        async  function fetchData() {
+function App(props) {
+    useEffect(() => {
+        async function getUser() {
             try {
-                const {data} = await axios.get("")
+                const { data } = await axios.get("t/user")
+                props.setUser(
+                    {
+                        name: data.username,
+                        email:data.email
+                    })
 
-                console.log(data)
+
             } catch (error) {
-                console.log(error)
+                console.log("user is not aunteticated")
             }
+
         }
-        fetchData()
+        getUser()
     }, [])
     return (
         <AppContainer>
             <Switch>
-                <Route path="/SingIn">
-                    <SignIn />
-                </Route>
-                <Route path="/SingUp">
-                    <SignUp />
-                </Route>
-                <Route path="/Price">
-                    <Price />
-                </Route>
-                <Route path="/PageExample/:id">
-                    <PageExample />
-                </Route>
-                <Route path="/Notes">
-                    <Notes />
-                </Route>
-                <Redirect >
-                    <Home />
-                </Redirect>
-
+                {configRoutes().map((route, i) => (
+                    <RoutersComponets key={i} {...route} />
+                ))}
             </Switch>
         </AppContainer>
     )
 };
 
 const mapStateToProps = (state) => ({
-    user: state
+    user: state.user
+
 })
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = { setUser }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -2,6 +2,7 @@
     "python.terminal.activateEnvironment": true,
     "python.terminal.activateEnvInCurrentTerminal": true,
     "python.linting.enabled": true,
+    "python.venvPath": "",
 
     
     "files.exclude": {
