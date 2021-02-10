@@ -16,7 +16,7 @@ function App(props) {
                 props.setUser(
                     {
                         name: data.username,
-                        email:data.email
+                        email: data.email
                     })
 
 
@@ -27,12 +27,19 @@ function App(props) {
         }
         getUser()
     }, [])
+    useEffect(()=>{
+        console.log("asa")
+        
+    },[props.user])
     return (
         <AppContainer>
             <Switch>
-                {configRoutes().map((route, i) => (
-                    <RoutersComponets key={i} {...route} />
-                ))}
+                {configRoutes(props.user.name).map((route, i) => {
+                    
+                    return (
+                        <RoutersComponets key={i} {...route} />
+                    )
+                })}
             </Switch>
         </AppContainer>
     )

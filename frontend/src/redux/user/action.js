@@ -9,3 +9,9 @@ export function setUser({name,email}){
         }
     }
 }
+
+export function  logOut(){
+    return{
+        type:type.LOG_OUT,
+    }
+}
