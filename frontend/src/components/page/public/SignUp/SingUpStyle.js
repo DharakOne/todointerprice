@@ -6,36 +6,37 @@ export const ContainerSingUp = Styled(Container)`
     background: radial-gradient(54.05% 102.79% at 50% 50%, #9256DB 0%, #3A5CB4 100%);
 `
 
-export const FormE=Styled.form`
-
-`
-
-export const ContainerForm = Styled.div`
+export const Form =Styled.form`
     border-radius: 34px;
     width: 656px;
     height: 680px;
     background: #FBFBFB;
     margin: 69px auto 69px auto;
-
     @media (max-width: 730px) {
-        height: auto;
-        width: 90vw;
-        padding-bottom: 35px;
+        max-width:500px;
     }
+    @media (max-width: 570px) {
+        max-width:400px;
+    }
+    @media (max-width: 450px){
+        max-width:300px;
+    }
+
 `
 
-export const Form = Styled.div`
+
+export const FormC = Styled.div`
     margin-left: 71px ;
     margin-right:71px;
     display:grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 56px;
     row-gap: 18px;
+
     @media (max-width: 730px) {
         grid-template-columns:1fr; 
-
     }
-    @media (max-width: 404px) {
+    @media (max-width: 450px) {
         margin-left: 20px;
         margin-right:20px;
     }      

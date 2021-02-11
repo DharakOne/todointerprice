@@ -47,7 +47,7 @@ export const InputPassword = Styled.input.attrs({
     width:100%;
     background: #EFEFEF;
     border: 1px solid #E5E5E5;
-    box-sizing: border-box;
+    box-sizing: border-box; 
     box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.25);
     height: 40px;
 `

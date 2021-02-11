@@ -3,10 +3,10 @@ import DatePicker from "react-datepicker"
 
 import Layout from "../Layout/index"
 import {
-        FormE,Form,ContainerForm,ContainerSingUp,
+        FormE,FormC,Form,ContainerForm,ContainerSingUp,
         ContainerInput,Input,InputLabel,InputName,
         InputPassword,InputSelect,TitleForm, ButtomSubmit,LabelButtom} from "./SingUpStyle"
-
+ 
 export default function SingUp() {
     const [startDate, setStartDate] = useState(new Date());
     const [formData, formDataSet] = useState({
@@ -33,13 +33,12 @@ export default function SingUp() {
     }
     return (
         <Layout>
-            <FormE>
             <ContainerSingUp>
-                <ContainerForm>
+                <Form>
                     <TitleForm>
                         Registration Form
                     </TitleForm>
-                    <Form>
+                    <FormC>
 
                         <ContainerInput>
                             <InputName >
@@ -102,12 +101,11 @@ export default function SingUp() {
                             <InputPassword name="vPassword" type="password"  autocomplete="new-password"   onChange={catchChange} value={formData.vPassword} ></InputPassword>
                         </ContainerInput>
 
-                    </Form>
+                    </FormC>
                     <ButtomSubmit onClick={createNewUSer} > <LabelButtom>Submit</LabelButtom></ButtomSubmit>
-                </ContainerForm>
+                </Form>
 
             </ContainerSingUp>
-            </FormE>
         </Layout>
     )
 }

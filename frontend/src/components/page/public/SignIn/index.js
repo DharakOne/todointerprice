@@ -1,10 +1,12 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom"
+import {connect} from "react-redux"
 import axios from "axios"
+import {setUser} from "../../../../redux/user/action"
 
 import Layout from "../Layout/index"
 import {
-    Form,
+    Form, 
     Title,
     ContainerSingIn,
     ContentForm,
@@ -16,7 +18,7 @@ import {
     BlockErrorContainer
 } from "./SignInStyle"
 
-export default function SignIn() {
+function SignIn(props) {
     const [formData, formDataSet] = useState({
         email: "",
         password: "",
@@ -36,8 +38,10 @@ export default function SignIn() {
             setErrorLogin(false)
             try {
                 const { data } = await axios.post("p/signin", formData)
+                console.log(data)
                 localStorage.setItem("token", data.token)
                 await new Promise(r => setTimeout(r, 2000));
+                props.setUser()
                 history.push("/user")
             } catch (error) {
                 console.log("A error acurred")
@@ -83,3 +87,10 @@ export default function SignIn() {
         </Layout>
     )
 }
+
+
+const mapDispatchToProps={
+    setUser
+}
+
+export default connect(null,mapDispatchToProps)(SignIn)

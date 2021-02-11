@@ -8,11 +8,12 @@ import datetime
 
 class  Sign_up(Resource):
     def post(self):
-        username = request.json["username"]
+        print(request.json())
+        name = request.json["name"]
         password =  request.json["password"]
         email=request.json["email"]
 
-        new_user = User(username=username, email=email,password=password)
+        new_user = User(username=name, email=email,password=password)
         db.session.add_all([new_user])
         db.session.commit()
         return {'succes': 'succefully'}
@@ -31,7 +32,7 @@ class Sign_in(Resource):
         
         expires = datetime.timedelta(days=7)
         access_token = create_access_token(identity=str(user.id), expires_delta=expires)
-        return {'token': access_token}, 200
+        return {'token': access_token,"user":user.to_dict(only=('email', 'username'))}, 200
 
 class User_handled(Resource):
     @jwt_required
