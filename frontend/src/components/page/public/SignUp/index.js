@@ -10,8 +10,8 @@ import {
 export default function SingUp() {
     const [startDate, setStartDate] = useState(new Date());
     const [formData, formDataSet] = useState({
-        firstName: "",
-        lastName: "",
+        username: "",
+        name: "",
         email:"",
         phone:"",
         gender:"",
@@ -44,14 +44,14 @@ export default function SingUp() {
                             <InputName >
                                 First Name
                             </InputName>
-                            <Input name="firstName" onChange={catchChange} value={formData.firstName} ></Input>
+                            <Input name="username" onChange={catchChange} value={formData.firstName} ></Input>
                         </ContainerInput>
 
                         <ContainerInput>
                             <InputName>
                                 Last Name
                             </InputName>
-                            <Input name="lastName" onChange={catchChange} value={formData.lastName} ></Input>
+                            <Input name="name" onChange={catchChange} value={formData.lastName} ></Input>
                         </ContainerInput>
 
                         <ContainerInput>

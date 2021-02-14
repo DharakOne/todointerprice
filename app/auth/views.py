@@ -1,10 +1,10 @@
-from flask_restful import Resource
+from flask_restful import Resource 
 from .models import User
-from app.main import db
+from app.main import db, app
 from flask import request
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 import datetime
-
+  
 
 class  Sign_up(Resource):
     def post(self):
