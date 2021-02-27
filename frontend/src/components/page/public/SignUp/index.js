@@ -42,14 +42,14 @@ export default function SingUp() {
 
                         <ContainerInput>
                             <InputName >
-                                First Name
+                                User Name
                             </InputName>
                             <Input name="username" onChange={catchChange} value={formData.firstName} ></Input>
                         </ContainerInput>
 
                         <ContainerInput>
                             <InputName>
-                                Last Name
+                                Name
                             </InputName>
                             <Input name="name" onChange={catchChange} value={formData.lastName} ></Input>
                         </ContainerInput>
