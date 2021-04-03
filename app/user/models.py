@@ -1,19 +1,109 @@
-from sqlalchemy_serializer import SerializerMixin
+from marshmallow import Schema, fields,pre_load, validate,EXCLUDE, ValidationError, validates_schema,post_load,post_dump
 from werkzeug.security import generate_password_hash, check_password_hash
-
-
-class User(db.Model, SerializerMixin):
-    __tablename__ = "users"
-    serialize_rules = ("-password_hash",)
-    serialize_only = ()
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(25), unique=True, index=True)
-    username = db.Column(db.String(10), unique=True, index=True)
-    email=db.Column(db.String(60),unique=True,key="email")
-    password_hash = db.Column(db.String(128))
-    gender=db.Column
+from datetime import  datetime
+from app.utils.model import Model
+from app import database
 
 
 
-    def __repr__(self):
-        return "<User %r > " % self.username
+def stringValidate(nameProperty,min=1,max=255):
+    def callback(value):
+        errors = {}
+        if (len(value)>=max):
+            errors[nameProperty] =["{} must be less than {} letters".format(nameProperty,max)]
+            raise ValidationError (errors)
+        if (len(value)<min):
+            errors[nameProperty] = ["{} must have a minimun of {} letters".format(nameProperty,min)]
+            raise ValidationError(errors)
+    return callback
+
+def oneOfValidate(nameProperty,list):
+    def callback(value):
+        if not (value in list):
+            raise ValidationError("Please choose a valid value  to {} ".format(nameProperty))
+    return callback
+
+def phoneNumberValidate(value):
+    try: 
+        int(value)
+    except:
+        raise ValidationError("Please enter a valid number to phone number")
+
+def emailUniqueValidate(value):
+    if database["User"].find_one({"email":value}):
+        error={"error":["Email already have create. Please enter other email"]}
+        raise ValidationError(error)
+    
+
+
+
+class User(Model):
+    def __init__(self,userName,email,companyName,phoneNumber,birthday,password_hash,gender,creation_date,last_update_date,**kwargs):
+
+        self.userName=userName 
+        self.email = email
+        self.companyName=companyName
+        self.phoneNumber=phoneNumber
+        self.birthday=birthday
+        self.gender=gender
+        self.password_hash=password_hash
+        self.creation_date=creation_date
+        self.last_update_date=last_update_date
+       
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+
+
+
+class UserSchema(Schema):
+    userName = fields.Str(required=True,validate=[stringValidate("User Name")])
+    email = fields.Email(required=True)
+    birthday = fields.DateTime(required=True,format="%Y-%m-%dT%H:%M:%S.%fZ")
+    gender=fields.String(required=True,validate=oneOfValidate("gender",["male", "female"]))
+    phoneNumber=fields.String(required=True,validate=[validate.Length(min=8),phoneNumberValidate])
+    companyName=fields.String(required=True,validate=stringValidate("Company Name"))
+    creation_date=fields.DateTime(required=True,format="%Y-%m-%dT%H:%M:%S.%fZ")
+    last_update_date=fields.DateTime(required=True,format="%Y-%m-%dT%H:%M:%S.%fZ")
+
+    class Meta:
+            unknown = EXCLUDE
+
+
+class CreateUserSchema(UserSchema):
+    password=fields.String(required=True)
+    vPassword=fields.String()
+    
+    @pre_load
+    def verify_password(self, data, **kwargs):
+        stringValidate("Password",min=5)(data["password"])
+        emailUniqueValidate(data["email"])
+        if not (data["vPassword"]==data["password"]):
+            error={"errors":["Password and Verify password is not same."]}
+            raise ValidationError(error)
+        
+        data["creation_date"]=datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+        data["last_update_date"]=datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+
+
+        return data
+
+    @post_load
+    def make_user(self, data, **kwargs):
+        data["password_hash"]=generate_password_hash(data["password"])
+
+        return User(**data)
+    
+
+class LoadUserShema(UserSchema):
+    password_hash=fields.String(required=True)
+    @post_load
+    def make_user(self, data, **kwargs):
+        return User(**data)
+
+    @post_dump
+    def make_dict(self,data,**kwargs):
+        return data
+
+CreateUserModel= CreateUserSchema()
+LoadUserModel=LoadUserShema()

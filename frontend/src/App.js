@@ -11,8 +11,11 @@ import { setUser } from "./redux/user/action"
 function App(props) {
     useEffect(() => {
         async function getUser() {
+                const  data1 = await (await axios.get("")).data
+                console.log(data1)
             try {
-                const { data } = await axios.get("t/user")
+                const { data } = await axios.get("user")
+
                 props.setUser(
                     {
                         name: data.username,

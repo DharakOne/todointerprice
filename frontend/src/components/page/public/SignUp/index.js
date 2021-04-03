@@ -1,35 +1,51 @@
 import React, { useState } from "react"
 import DatePicker from "react-datepicker"
+import useApi from "../../../utils/apiHook"
 
 import Layout from "../Layout/index"
 import {
-        FormE,FormC,Form,ContainerForm,ContainerSingUp,
-        ContainerInput,Input,InputLabel,InputName,
-        InputPassword,InputSelect,TitleForm, ButtomSubmit,LabelButtom} from "./SingUpStyle"
- 
-export default function SingUp() {
-    const [startDate, setStartDate] = useState(new Date());
+    FormC, Form,
+    ContainerInput, Input, InputLabel, InputName,
+    InputPassword, InputSelect, TitleForm, ButtomSubmit, LabelButtom, BlockErrorContainer, ContainerSingUp, ContainerForm
+} from "./SingUpStyle"
+
+
+function BlockError(props) {
+
+    if (props.showError) {
+        const {errors} = props.answer.data
+        const firstError = Object.values(errors)[0][0]
+
+        return (
+            <BlockErrorContainer>
+                {firstError}
+            </BlockErrorContainer>
+        )
+    }
+    return null
+}
+
+export default function SignUp() {
+    const [startDate, setStartDate] = useState( new Date());
     const [formData, formDataSet] = useState({
-        username: "",
-        name: "",
-        email:"",
-        phone:"",
-        gender:"",
+        userName: "",
+        companyName: "",
+        email: "",
+        phoneNumber: "",
+        gender: "",
         password: "",
         vPassword: ""
     })
+    const [answer, waitAnswer, errorRequest, handeldEvent] = useApi(1000)
+    
     function catchChange(event) {
-
-        const data = event.target
-       
-            formDataSet({ ...formData, [data.name]: data.value })
-
+        let data = event.target
+        formDataSet({ ...formData, [data.name]: data.value })
     }
 
-    function createNewUSer(){
-        console.log("Usuario nuevo creado")
-        console.log(formData)
-        console.log(startDate)
+    async function createNewUser() {
+        let data = { ...formData, birthday: startDate }
+        await handeldEvent("user/signUp", "post", { data })
     }
     return (
         <Layout>
@@ -38,73 +54,74 @@ export default function SingUp() {
                     <TitleForm>
                         Registration Form
                     </TitleForm>
-                    <FormC>
+                    <ContainerForm>
 
-                        <ContainerInput>
-                            <InputName >
-                                User Name
+                        <FormC>
+
+                            <ContainerInput>
+                                <InputName >
+                                    User Name
                             </InputName>
-                            <Input name="username" onChange={catchChange} value={formData.firstName} ></Input>
-                        </ContainerInput>
+                                <Input name="userName" onChange={catchChange} value={formData.userName} ></Input>
+                            </ContainerInput>
 
-                        <ContainerInput>
-                            <InputName>
-                                Name
+                            <ContainerInput>
+                                <InputName >
+                                    Comapany Name
                             </InputName>
-                            <Input name="name" onChange={catchChange} value={formData.lastName} ></Input>
-                        </ContainerInput>
+                                <Input name="companyName" onChange={catchChange} value={formData.companyName} ></Input>
+                            </ContainerInput>
 
-                        <ContainerInput>
-                            <InputName>
-                                Birthday
+                            <ContainerInput>
+                                <InputName>
+                                    Email
                             </InputName>
-                            <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
-                        </ContainerInput>
+                                <Input name="email" type="email" onChange={catchChange} value={formData.email} ></Input>
+                            </ContainerInput>
 
-
-                        <ContainerInput>
-                            <InputName>
-                                Gender 
+                            <ContainerInput>
+                                <InputName>
+                                    Phone Number
                             </InputName>
-                            <InputSelect name="gender" value="male"  margin="0 4px 0 0" onChange={catchChange} checked={"male"===formData.gender} />
-                            <InputLabel  >Male</InputLabel>
-                            <InputSelect name="gender" value="female" margin="0 4px 0 20px" onChange={catchChange} checked={"female"===formData.gender}></InputSelect>
-                            <InputLabel >Female</InputLabel>
+                                <Input name="phoneNumber" onChange={catchChange} value={formData.phoneNumber} ></Input>
+                            </ContainerInput>
 
-                        </ContainerInput>
-
-                        <ContainerInput>
-                            <InputName>
-                                Email
+                            <ContainerInput>
+                                <InputName>
+                                    Birthday
                             </InputName>
-                            <Input name="email" type="email" onChange={catchChange} value={formData.email} ></Input>
-                        </ContainerInput>
+                                <DatePicker selected={startDate} onChange={datePicker => setStartDate(datePicker)} />
+                            </ContainerInput>
 
-                        <ContainerInput>
-                            <InputName>
-                                Phone Number
+
+                            <ContainerInput>
+                                <InputName>
+                                    Gender
                             </InputName>
-                            <Input name="phone" type="number" onChange={catchChange} value={formData.phone} ></Input>
-                        </ContainerInput> 
+                                <InputSelect name="gender" value="male" margin="0 4px 0 0" onChange={catchChange} checked={"male" === formData.gender} />
+                                <InputLabel  >Male</InputLabel>
+                                <InputSelect name="gender" value="female" margin="0 4px 0 20px" onChange={catchChange} checked={"female" === formData.gender}></InputSelect>
+                                <InputLabel >Female</InputLabel>
+                            </ContainerInput>
 
-                        <ContainerInput>
-                            <InputName >
-                                Password
+                            <ContainerInput>
+                                <InputName >
+                                    Password
                             </InputName>
-                            <InputPassword name="password" type="password"  autocomplete="new-password" onChange={catchChange} value={formData.password} ></InputPassword>
-                        </ContainerInput>
+                                <InputPassword name="password" type="password" autocomplete="new-password" onChange={catchChange} value={formData.password} ></InputPassword>
+                            </ContainerInput>
 
-                        <ContainerInput>
-                            <InputName >
-                                Verify Password
+                            <ContainerInput>
+                                <InputName >
+                                    Verify Password
                             </InputName>
-                            <InputPassword name="vPassword" type="password"  autocomplete="new-password"   onChange={catchChange} value={formData.vPassword} ></InputPassword>
-                        </ContainerInput>
-
-                    </FormC>
-                    <ButtomSubmit onClick={createNewUSer} > <LabelButtom>Submit</LabelButtom></ButtomSubmit>
+                                <InputPassword name="vPassword" type="password" autocomplete="new-password" onChange={catchChange} value={formData.vPassword} ></InputPassword>
+                            </ContainerInput>
+                        </FormC>
+                        <ButtomSubmit active={waitAnswer} onClick={createNewUser} > <LabelButtom>Submit</LabelButtom></ButtomSubmit>
+                        <BlockError showError={errorRequest} answer={answer} />
+                    </ContainerForm>
                 </Form>
-
             </ContainerSingUp>
         </Layout>
     )

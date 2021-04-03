@@ -40,9 +40,15 @@ module.exports = {
         port: "4000",
         historyApiFallback: true,
         https: false,
+        proxy: {
+            '/api': {
+                target: 'https://3000-a8fdd359-8631-4bc6-88ab-a414bc9b7346.ws-us03.gitpod.io',
+                pathRewrite: { '^/api': '' },
+            },
+        }
     },
     devtool: false,
     module: {
-        rules: [BabelRuler, SVGRuler, ImageRuler,CSSRuler]
+        rules: [BabelRuler, SVGRuler, ImageRuler, CSSRuler]
     }
 };

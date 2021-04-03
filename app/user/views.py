@@ -1,44 +1,27 @@
-from flask_restful import Resource 
-from .models import User
-from app.main import db, app
 from flask import request
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
-import datetime
-  
+from app  import database
+from app.user.models import CreateUserModel,LoadUserModel,User
+from marshmallow import ValidationError
+from . import user_app
 
-class  Sign_up(Resource):
-    def post(self):
-        print(request.json())
-        name = request.json["name"]
-        password =  request.json["password"]
-        email=request.json["email"]
 
-        new_user = User(username=name, email=email,password=password)
-        db.session.add_all([new_user])
-        db.session.commit()
-        return {'succes': 'succefully'}
+@user_app.route('/signUp',methods=["POST"])
+def createUser():
+    data = request.get_json()
+    try:
+        new_user=CreateUserModel.load(data)
+    except ValidationError as err:
+        print(err.messages)
+        print(err)
+        return {"errors": err.messages}, 422
 
-class Sign_in(Resource):
-    def post (self):
-        body = request.get_json()
+    print(User.__name__)
+    database[User.__name__].insert_one(LoadUserModel.dump(new_user))
+    return "UserCretated"
 
-        user =User.query.filter_by(email=body.get('email')).first()
-        if user==None:
-            return {"error":'Email or password invalid' }, 401
+@user_app.route('/a',methods=["GET"])
+def getUsers():
+    print("aa")
+    user=User.find_one({})
+    return  user
 
-        authorized = user.verify_password(body.get('password'))
-        if not authorized:
-            return {'error': 'Email or password invalid'}, 401
-        
-        expires = datetime.timedelta(days=7)
-        access_token = create_access_token(identity=str(user.id), expires_delta=expires)
-        return {'token': access_token,"user":user.to_dict(only=('email', 'username'))}, 200
-
-class User_handled(Resource):
-    @jwt_required
-    def get(self):
-        user_id=get_jwt_identity()
-        my_user =User.query.filter_by(id=user_id).first()
-        print(my_user)
-        return my_user.to_dict()
-        

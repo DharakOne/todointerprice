@@ -6,14 +6,27 @@ export const ContainerSingUp = Styled(Container)`
     background: radial-gradient(54.05% 102.79% at 50% 50%, #9256DB 0%, #3A5CB4 100%);
 `
 
-export const Form =Styled.form`
+export const ContainerForm = Styled.form`
+    margin-left: 71px ;
+    margin-right:71px;
+    @media (max-width: 450px) {
+        margin-left: 20px;
+        margin-right:20px;
+    }
+`
+
+export const Form = Styled.form`
     border-radius: 34px;
     width: 656px;
-    height: 680px;
+    height: 600px;
+    padding-top:30px;
+    padding-bottom:15px;
     background: #FBFBFB;
     margin: 69px auto 69px auto;
     @media (max-width: 730px) {
         max-width:500px;
+        height: auto;
+        padding-bottom:45px;
     }
     @media (max-width: 570px) {
         max-width:400px;
@@ -26,8 +39,6 @@ export const Form =Styled.form`
 
 
 export const FormC = Styled.div`
-    margin-left: 71px ;
-    margin-right:71px;
     display:grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 56px;
@@ -36,17 +47,14 @@ export const FormC = Styled.div`
     @media (max-width: 730px) {
         grid-template-columns:1fr; 
     }
-    @media (max-width: 450px) {
-        margin-left: 20px;
-        margin-right:20px;
-    }      
+      
 `
 export const ContainerInput = Styled.div`
     grid-column:${props => props.gColumn ? props.gColumn : "auto"};
    
 `
 export const Input = Styled.input`
-    type: ${(props)=>props.type ? props.type:"text"};
+    type: ${(props) => props.type ? props.type : "text"};
     width:100%;
     background: #EFEFEF;
     border: 1px solid #E5E5E5;
@@ -54,9 +62,9 @@ export const Input = Styled.input`
     box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.25);
     height: 40px;
 `
-export const InputPassword=Styled.input.attrs({
-    type:"password",
-    autocomplete:"new-password"
+export const InputPassword = Styled.input.attrs({
+    type: "password",
+    autocomplete: "new-password"
 })`
     width:100%;
     background: #EFEFEF;
@@ -108,9 +116,8 @@ export const ButtomSubmit = Styled.div`
     width: 163px;
     height: 39px;
     margin-top:46px;
-    background: #5988FF;
+    background: ${props => props.active ? 'rgb(80, 99, 148)' : '#5988FF'};
     border-radius: 7px;
-    margin-left: 70px ;
     display:flex;
     align-items:center;
     justify-content: center;
@@ -128,4 +135,12 @@ export const LabelButtom = Styled.label`
 `
 
 export const InputLabel = Styled.label`
+`
+
+export const BlockErrorContainer = Styled.div`
+    background:rgb(255, 143, 143);
+    color:rgb(231, 34, 34);
+    padding:3px;
+    font-weight: bold;  
+    margin-top:20px; 
 `

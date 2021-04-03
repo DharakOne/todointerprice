@@ -38,7 +38,6 @@ function SignIn(props) {
             setErrorLogin(false)
             try {
                 const { data } = await axios.post("p/signin", formData)
-                console.log(data)
                 localStorage.setItem("token", data.token)
                 await new Promise(r => setTimeout(r, 2000));
                 props.setUser()

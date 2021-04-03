@@ -2,7 +2,14 @@
   // Use IntelliSense to learn about possible attributes.
   // Hover to view descriptions of existing attributes.
   "version": "0.2.0",
-  "configurations": [
+  "configurations": [{
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome",
+      "url": "https://4000-a8fdd359-8631-4bc6-88ab-a414bc9b7346.ws-us03.gitpod.io/",
+      "webRoot": "${workspaceFolder}"
+  },
+
     {
       "type": "node",
       "request": "launch",
