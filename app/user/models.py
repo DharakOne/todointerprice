@@ -29,8 +29,14 @@ def phoneNumberValidate(value):
     except:
         raise ValidationError("Please enter a valid number to phone number")
 
-def emailUniqueValidate(value):
+def emailUniqueValidate(value:str):
+    error:str =None
+    if not (value.find(".com")!=-1 and value.find("@")!=-1):
+            error={"error":["Email is no valid"]}
+            raise ValidationError(error)
+    
     if database["User"].find_one({"email":value}):
+        
         error={"error":["Email already have create. Please enter other email"]}
         raise ValidationError(error)
     
@@ -72,12 +78,12 @@ class UserSchema(Schema):
 
 class CreateUserSchema(UserSchema):
     password=fields.String(required=True)
-    vPassword=fields.String()
+    vPassword=fields.String(required=True)
     
     @pre_load
     def verify_password(self, data, **kwargs):
-        stringValidate("Password",min=5)(data["password"])
         emailUniqueValidate(data["email"])
+        stringValidate("Password",min=5)(data["password"])
         if not (data["vPassword"]==data["password"]):
             error={"errors":["Password and Verify password is not same."]}
             raise ValidationError(error)

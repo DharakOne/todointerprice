@@ -1,1 +1,16 @@
 https://3000-a8fdd359-8631-4bc6-88ab-a414bc9b7346.ws-us03.gitpod.io/user/a
+
+###
+
+POST https://3000-a8fdd359-8631-4bc6-88ab-a414bc9b7346.ws-us03.gitpod.io/user/signIn  
+content-type: application/json
+
+
+{
+    "email": "junior@gmail.com",
+    "password": "castro"
+}
+
+###
+GET https://3000-a8fdd359-8631-4bc6-88ab-a414bc9b7346.ws-us03.gitpod.io/clasificate
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYxOTI4NzYwNSwianRpIjoiYzI1MzdmYzYtMDJkYy00MDFjLWE0ZWMtOTg3YTJhNDQ4ZDNhIiwibmJmIjoxNjE5Mjg3NjA1LCJ0eXBlIjoiYWNjZXNzIiwic3ViIjp7ImVtYWlsIjoianVuaW9yQGdtYWlsLmNvbSJ9LCJleHAiOjE2MTkyODg1MDV9.pQ5RWyW1HnZxwOjACihXzofNS1EIdJGNvuPiuipz5G0

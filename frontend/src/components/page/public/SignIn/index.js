@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom"
 import {connect} from "react-redux"
 import axios from "axios"
 import {setUser} from "../../../../redux/user/action"
+import useApi from "../../../utils/apiHook"
+
 
 import Layout from "../Layout/index"
 import {
@@ -15,7 +17,6 @@ import {
     InputLabel,
     InputContainer,
     ButtomSumit,
-    BlockErrorContainer
 } from "./SignInStyle"
 
 function SignIn(props) {
@@ -24,45 +25,24 @@ function SignIn(props) {
         password: "",
     })
     const history = useHistory();
-    const [waitAnswer, setWaitAnswer] = useState(false)
-    const [errorLogin, setErrorLogin] = useState(false)
+    const [answer, waitAnswer, errorRequest, handeldEvent] = useApi(1000)
+
     function catchChange(event) {
         const data = event.target
         formDataSet({ ...formData, [data.name]: data.value })
     }
 
 
-    async function SignInHandeld(e) {
-        if (e.key == "Enter" || e == "submit" && !waitAnswer) {
-            setWaitAnswer(true)
-            setErrorLogin(false)
+    async function SignInHandeld() {
             try {
-                const { data } = await axios.post("p/signin", formData)
-                localStorage.setItem("token", data.token)
-                await new Promise(r => setTimeout(r, 2000));
-                props.setUser()
-                history.push("/user")
+                let {data} = await handeldEvent("user/signIn", "post", {data:formData})
+                localStorage.setItem("token", data.token) 
+                console.log(data)
             } catch (error) {
-                console.log("A error acurred")
-                await new Promise(r => setTimeout(r, 2000));
-                setErrorLogin(true)
-                setWaitAnswer(false)
             }
-
         }
 
-    }
-
-    function BlockError() {
-        if (errorLogin) {
-            return (
-                <BlockErrorContainer>
-                    Please enter a password or email correct.
-                </BlockErrorContainer>
-            )
-        }
-        return null
-    }
+    
     return (
         <Layout>
             <ContainerSingIn>
@@ -76,8 +56,7 @@ function SignIn(props) {
                         <InputContainer>
                             <InputLabel >Password</InputLabel>
                             <InputPassword onKeyUp={SignInHandeld} onChange={catchChange} name="password" value={formData.password} />
-                            <BlockError />
-                            <ButtomSumit onClick={() => SignInHandeld("submit")}  >Login</ButtomSumit>
+                            <ButtomSumit onClick={ SignInHandeld}  >Login</ButtomSumit>
                         </InputContainer>
 
                     </ContentForm>

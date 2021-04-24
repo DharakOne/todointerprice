@@ -3,27 +3,15 @@ import DatePicker from "react-datepicker"
 import useApi from "../../../utils/apiHook"
 
 import Layout from "../Layout/index"
+import BlockError from "../../../utils/BlockError"
+
 import {
     FormC, Form,
     ContainerInput, Input, InputLabel, InputName,
-    InputPassword, InputSelect, TitleForm, ButtomSubmit, LabelButtom, BlockErrorContainer, ContainerSingUp, ContainerForm
+    InputPassword, InputSelect, TitleForm, ButtomSubmit, LabelButtom, ContainerSingUp, ContainerForm
 } from "./SingUpStyle"
 
 
-function BlockError(props) {
-
-    if (props.showError) {
-        const {errors} = props.answer.data
-        const firstError = Object.values(errors)[0][0]
-
-        return (
-            <BlockErrorContainer>
-                {firstError}
-            </BlockErrorContainer>
-        )
-    }
-    return null
-}
 
 export default function SignUp() {
     const [startDate, setStartDate] = useState( new Date());
@@ -44,8 +32,14 @@ export default function SignUp() {
     }
 
     async function createNewUser() {
-        let data = { ...formData, birthday: startDate }
-        await handeldEvent("user/signUp", "post", { data })
+        try {
+                    let data = { ...formData, birthday: startDate }
+                    await handeldEvent("user/signUp", "post", { data })
+                    
+        } catch (error) {
+            console.log(`aa ${error}`)
+        }
+
     }
     return (
         <Layout>

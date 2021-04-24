@@ -137,10 +137,3 @@ export const LabelButtom = Styled.label`
 export const InputLabel = Styled.label`
 `
 
-export const BlockErrorContainer = Styled.div`
-    background:rgb(255, 143, 143);
-    color:rgb(231, 34, 34);
-    padding:3px;
-    font-weight: bold;  
-    margin-top:20px; 
-`
