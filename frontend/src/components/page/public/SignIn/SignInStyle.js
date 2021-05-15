@@ -8,15 +8,15 @@ export const ContainerSingIn = Styled.div`
     justify-content:center;
 `
 
-export const Form=Styled.form`
+export const Form = Styled.form`
     width:400px;
     background:white;
     margin: 120px 0 120px;
     padding: 40px 0 40px;
     border-radius:10px;
 `
- 
-export const Title=Styled.div`
+
+export const Title = Styled.div`
     text-align: center;
     font-family: Roboto;
     font-style: normal;
@@ -26,14 +26,14 @@ export const Title=Styled.div`
     color: #000000;
 `
 
-export const ContentForm=Styled.div`
+export const ContentForm = Styled.div`
     margin: 20px 20px 0;
     padding:10px;
     display:flex;
     flex-direction:column;
 `
 
-export const InputContainer=Styled.div`
+export const InputContainer = Styled.div`
     margin-bottom:20px;
     display:grid;
     grid-template-rows: auto auto;
@@ -42,7 +42,7 @@ export const InputContainer=Styled.div`
 
 export const InputPassword = Styled.input.attrs({
     type: 'password',
-    autocomplete:"current-password"
+    autocomplete: "current-password"
 })`
     width:100%;
     background: #EFEFEF;
@@ -51,8 +51,9 @@ export const InputPassword = Styled.input.attrs({
     box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.25);
     height: 40px;
 `
-export const Input=Styled.input.attrs({
-    type: 'email',})`
+export const Input = Styled.input.attrs({
+    type: 'email',
+})`
     width:100%;
     background: #EFEFEF;
     border: 1px solid #E5E5E5;
@@ -61,17 +62,17 @@ export const Input=Styled.input.attrs({
     height: 40px;
 `
 
-export const InputLabel=Styled.label`
+export const InputLabel = Styled.label`
     
 `
 
-export const ButtomSumit=Styled.div.attrs({
+export const ButtomSumit = Styled.div.attrs({
     type: 'submit',
 })`
     color:black;
     text-decoration: none;    
     padding: 10px 20px 10px;
-    background: rgb(57, 241, 165);
+    background: ${(props) => props.waitAnswer ? "rgb(33, 189, 124)" :"rgb(57, 241, 165)"} ;
     border-radius:10px;
     width:min-content;
     font-weight: bold;   
@@ -79,9 +80,11 @@ export const ButtomSumit=Styled.div.attrs({
     cursor: pointer;
 `
 
-export const BlockErrorContainer=Styled.div`
+
+export const BlockErrorContainer = Styled.div`
     background:rgb(255, 143, 143);
     color:rgb(231, 34, 34);
     padding:3px;
-    font-weight: bold;   
+    font-weight: bold;
+    border-radius:4px;
 `

@@ -7,7 +7,7 @@ export default function useApi(time = 4500) {
     const [waitAnswer, setWaitAnswer] = useState(false)
     const [errorRequest, setErrorRequest] = useState(false)
 
-    async function handeldEvent(url = "", method = "get", config = {}, timeout = 10000) {
+    async function handeldEvent({url = "", method = "GET", config = {}, timeout = 10000}) {
 
         if (waitAnswer) {
             return
@@ -44,5 +44,5 @@ export default function useApi(time = 4500) {
             throw response
         }
     }
-    return [answer, waitAnswer, errorRequest, handeldEvent]
+    return {answer, waitAnswer, errorRequest, handeldEvent}
 }

@@ -11,11 +11,11 @@ import UserHome from "../components/page/private/UserHome"
 
 
 export default function configRoutes(user) {
-    console.log("sdfdfdf")
-    const privates=[
+    const privates = [
         {
-        path:"/user",
-        component : user ? <UserHome/>: <Redirect to="/"/> }
+            path: "/user",
+            component: user ? <UserHome /> : <Redirect to="/" />
+        }
     ]
     const publics = [
         {
@@ -24,7 +24,7 @@ export default function configRoutes(user) {
         },
         {
             path: "/SingUp",
-            component: <SingUp />,
+            component: user ? <Redirect to="/user" /> : <SingUp />,
         },
         {
             path: "/PageExample/:id",
@@ -37,7 +37,7 @@ export default function configRoutes(user) {
         },
         {
             path: "/",
-            component: user ?  <Redirect to="/user"/>  : <Home /> 
+            component: user ? <Redirect to="/user" /> : <Home />
         }
     ]
     const routes = [

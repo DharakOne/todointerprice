@@ -11,7 +11,7 @@ export const AppBarContainer = Styled(Container)`
     background: radial-gradient(50% 50% at 50% 50%, #717EF2 0%, #5E6EFF 100%);
     justify-content:space-between;
     align-items:center;
-    height:80px;
+    height:60px;
     padding:0 2%;
     @media (max-width: 560px) {
         flex-direction:column;
@@ -50,4 +50,12 @@ export const Link = Styled(LinkRouter)`
     color: #FFFFFF;
     text-decoration:none;
     padding-top:8px;
+`
+
+export const LinkLogout=Styled(Link)`
+    background-color:rgb(255, 120, 120);
+    padding-top:0;
+    padding:4px;
+    margin-top:2px;
+    border-radius:5px;
 `

@@ -1,11 +1,12 @@
 import * as type from "./typeActions"
 
-export function setUser({name,email}){
+export function setUser({userName,email}){
     return {
         type:type.SET_USER,
         payload:{
-            name,
-            email
+            userName,
+            email,
+            loadUser:true
         }
     }
 }

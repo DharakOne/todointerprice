@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker"
 import useApi from "../../../utils/apiHook"
 
 import Layout from "../Layout/index"
-import BlockError from "../../../utils/BlockError"
+import BlockError from "./BlockError"
 
 import {
     FormC, Form,
@@ -24,7 +24,7 @@ export default function SignUp() {
         password: "",
         vPassword: ""
     })
-    const [answer, waitAnswer, errorRequest, handeldEvent] = useApi(1000)
+    const {answer, waitAnswer, errorRequest, handeldEvent} = useApi(1000)
     
     function catchChange(event) {
         let data = event.target
@@ -34,7 +34,7 @@ export default function SignUp() {
     async function createNewUser() {
         try {
                     let data = { ...formData, birthday: startDate }
-                    await handeldEvent("user/signUp", "post", { data })
+                    await handeldEvent({url:"user/signUp", method:"post",config: { data }})
                     
         } catch (error) {
             console.log(`aa ${error}`)

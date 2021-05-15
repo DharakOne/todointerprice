@@ -13,3 +13,4 @@ ports:
 vscode:
   extensions:
     - ms-python.python@2020.10.332292344:5ctthQ25Qni5/aAuOIUTYQ==
+    - jpoissonnier.vscode-styled-components@1.5.2:3b94ebf2b54c2d3dc3f25129a80ead34

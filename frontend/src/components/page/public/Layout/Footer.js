@@ -44,7 +44,6 @@ const SubTitle = Styled.h2`
     font-weight: 500;
 `
 const Typography = Styled.div`
-    text-aling:center;
     font-family: Roboto;
 `
 const Link = Styled(RouterLink)`

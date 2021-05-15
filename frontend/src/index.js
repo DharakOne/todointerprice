@@ -10,7 +10,9 @@ import StoreApp from "./redux/StoreApp"
 import App from "./App"
 
 //axios.defaults.baseURL = 'http://127.0.0.1:3000/';
-axios.defaults.baseURL = "https://3000-a8fdd359-8631-4bc6-88ab-a414bc9b7346.ws-us03.gitpod.io/"
+axios.defaults.baseURL = "https://3000-a8fdd359-8631-4bc6-88ab-a414bc9b7346.ws-us04.gitpod.io/"
+
+
 
 axios.interceptors.request.use(request => {
     const token = localStorage.getItem('token');
@@ -32,5 +34,3 @@ ReactDOM.render(
     </BrowserRouter>
     , document.getElementById('root'));
 
-//npm start -- --public "$(gp url 3000 | sed 's+https://++'):443"
-//npm start -- --public $(gp url 3000 | sed 's+https://++'):443

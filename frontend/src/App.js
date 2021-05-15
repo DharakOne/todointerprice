@@ -6,44 +6,62 @@ import AppContainer from "./components/utils/Container"
 import configRoutes from "./config/routes"
 import RoutersComponets from "./components/utils/RoutersComponets"
 import { setUser } from "./redux/user/action"
+import useApi from "./components/utils/apiHook"
 
 
 function App(props) {
+    const { handeldEvent: getUserapi } = useApi(0)
+
     useEffect(() => {
         async function getUser() {
-                const  data1 = await (await axios.get("")).data
-                console.log(data1)
+            if (props.user.loadUser) {
+                return
+            }
             try {
-                const { data } = await axios.get("user")
+                const { data } = await getUserapi({ url: "user/getUser", timeout: 0 })
 
-                props.setUser(
-                    {
-                        name: data.username,
-                        email: data.email
-                    })
+
+                const { userName, email } = data
+                if (!(props.user.userName == userName && props.userName.email == email)) {
+                    props.setUser(
+                        {
+                            userName: data.userName,
+                            email: data.email
+                        })
+                }
 
 
             } catch (error) {
                 console.log("user is not aunteticated")
+                if (!props.user.loadUser) {
+                    props.setUser(
+                        { userName: null, email: null })
+                }
+
             }
 
         }
         getUser()
-    }, [])
-    useEffect(()=>{
-        console.log("asa")
-        
-    },[props.user])
+    }, [props.user])
+
+    const MainSwitch = () => (
+        <Switch>
+            {configRoutes(props.user.userName).map((route, i) => {
+
+                return (
+                    <RoutersComponets key={i} {...route} />
+                )
+            })}
+        </Switch>)
+
+    const LoadPage = () => <div></div>
+
+    const ShowPage = props.user.loadUser ? MainSwitch : LoadPage
+
+
     return (
         <AppContainer>
-            <Switch>
-                {configRoutes(props.user.name).map((route, i) => {
-                    
-                    return (
-                        <RoutersComponets key={i} {...route} />
-                    )
-                })}
-            </Switch>
+            <ShowPage />
         </AppContainer>
     )
 };

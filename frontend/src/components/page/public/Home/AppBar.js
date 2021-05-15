@@ -20,7 +20,6 @@ export default function Appbar() {
             <LinkContainer >
                 <Link to="/SingUp" >Sing Up</Link>
                 <Link to="/PageExample/About" >About</Link>
-                <Link to="/Notes" >Notes</Link>
 
             </LinkContainer>
         </AppBarContainer>

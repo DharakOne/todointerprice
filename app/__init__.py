@@ -3,7 +3,6 @@ from flask import Flask,current_app
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager,jwt_required,get_jwt_identity
 from dotenv import load_dotenv
-#from flask_pymongo import PyMongo
 
 from pymongo import MongoClient
 
