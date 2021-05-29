@@ -2,12 +2,14 @@ import React from "react"
 import Layout from "../../public/Layout"
 import { connect } from "react-redux"
 import { useHistory } from "react-router-dom"
+import Styled from "styled-components"
 
 import { logOut } from "../../../../redux/user/action"
 import { ContainerUserHome, Title, SecondBarContainer, SearchBar, CreateStyle, SearchBarContainer } from "./UserStyle"
 import IconStyle from "../../../utils/IconStyle"
+import TableTask from "./TableTask"
+
 import IconLens from "./lens.svg"
-import Styled from "styled-components"
 
 const LensIconStyle = Styled(IconStyle)`
     background: rgba(255, 168, 0, 1);
@@ -35,10 +37,7 @@ function UserHome(props) {
                     </SearchBarContainer>
                     <CreateStyle>+</CreateStyle>
                 </SecondBarContainer>
-
-                <p>My user name is  {props.user.userName}</p>
-                <p>My email is {props.user.email}</p>
-                <button onClick={handledLogOut}>Log Out</button>
+                <TableTask/>
             </ContainerUserHome>
         </Layout>)
 }

@@ -52,10 +52,19 @@ export const Link = Styled(LinkRouter)`
     padding-top:8px;
 `
 
-export const LinkLogout=Styled(Link)`
+export const LinkLogout=Styled.label`
     background-color:rgb(255, 120, 120);
     padding-top:0;
     padding:4px;
     margin-top:2px;
     border-radius:5px;
+    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    color: #FFFFFF;
+    text-decoration:none;
+    padding-top:8px;
 `
