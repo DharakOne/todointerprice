@@ -54,4 +54,5 @@ export const CreateStyle = Styled.div`
     align-items:center;
     color: #FFFFFF;
     border-radius:50%;
+    cursor: pointer;
 `

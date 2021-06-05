@@ -14,7 +14,7 @@ import TeethTab from "./TeethTab"
 
 //Data of Example
 
-function createData(number, Name = "Task First") {
+function createData(number, Name = "Task First", MaxData = 40) {
     let Tasks = []
 
     for (let i = 0; i < number; i++) {
@@ -25,11 +25,6 @@ function createData(number, Name = "Task First") {
     }
 
     return Tasks
-}
-
-const Task = {
-    Name: "Task First", Company: "Canju Freeze", Assigned: "Junior Castro", EndDate: "Dec 30, 2020", Done: true,
-    Description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit sfdd"
 }
 
 
@@ -98,25 +93,24 @@ function TaskBar({ Company, Assigned, Name, EndDate, Description }) {
 
 export default function TableTask() {
     const [state, setState] = useState({
-        numberActivate: 0,
-        numberTeeth: 6,
-        Tasks: createData(8)
+        numberActivate: 1,
+        rangeTeeth: [1, 2, 3, 4, 5],
+        isMax: true,
+        isMin: true,
+        Tasks: createData(8),
     })
 
 
     function searchTasks(numberActivate) {
         const Name = "Task " + numberActivate
-        let Tasks 
+        let Tasks
+            try {
+                Tasks = createData(8, Name)
+            } catch (error) {
+                console.log(error)
+                return
 
-        try {
-            Tasks = createData(8, Name)
-            if (numberActivate > 4 || numberActivate < 0)
-                throw "SobreSale los limites permitido"
-        } catch (error) {
-            console.log(error)
-            return
-
-        }
+            }
         setState({ ...state, numberActivate, Tasks })
     }
 
@@ -130,8 +124,11 @@ export default function TableTask() {
             </ContainerTable>
             <TeethTab
                 numberActivate={state.numberActivate}
-                numberTeeth={state.numberTeeth}
-                eventTooth={searchTasks} />
+                rangeTeeth={state.rangeTeeth}
+                eventTooth={searchTasks}
+                isMax={state.isMax}
+                isMin={state.isMin}
+            />
         </Background>
 
     )

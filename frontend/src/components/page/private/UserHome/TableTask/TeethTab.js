@@ -23,6 +23,8 @@ const Tooth = Styled.div`
     justify-content:center;
     align-items:center;
 
+    cursor: pointer;
+
 
     color:${(props) => props.activate ? "white" : "black"};
     font-family: Roboto;
@@ -31,6 +33,7 @@ const Tooth = Styled.div`
     font-size: 18px;
     line-height: 21px;
 `
+
 const FirstTooth = Styled(Tooth)`
     border-radius: 10px 0px 0px 10px;
 `
@@ -44,7 +47,7 @@ const CenterTooth = Styled(Tooth)`
 `
 
 
-export default function TeethTab({ numberActivate, numberTeeth, eventTooth }) {
+export default function TeethTab({ numberActivate, rangeTeeth, eventTooth, isMax = false, isMin = true }) {
 
     function handleSearch(e) {
         const number = parseInt(e.target.getAttribute("title"))
@@ -54,27 +57,25 @@ export default function TeethTab({ numberActivate, numberTeeth, eventTooth }) {
     function handleArrow(e) {
         const title = e.target.getAttribute("title")
         const number = title === "right" ? numberActivate + 1 : numberActivate - 1
-        eventTooth(number)
-    }
-
-    function handleLast(e) {
-        const number = numberTeeth + 1
-        eventTooth(number)
-
-    }
-
-    function handleNumberTeeth() {
-        const maxTeeth = 5
-        const maxRange = maxTeeth + numberTeeth + 1
-
-        let myArray = []
-
-        for (let i = 0; i < maxRange; i++) {
-            myArray.push(numberTeeth + i + 1)
+        if (numberActivate <= 1 && title === "left") {
+            return
         }
-        console.log(myArray)
-        return myArray
+        eventTooth(number)
     }
+
+    function handleExtreme(e) {
+        const title = e.target.getAttribute("title")
+        if (title == "PL") {
+            const number = rangeTeeth[0] - 1
+            eventTooth(number)
+        } else {
+            const number = rangeTeeth[rangeTeeth.length - 1] + 1
+            eventTooth(number)
+        }
+
+    }
+
+
     return (
         <Background>
             <ContainerTeeth>
@@ -83,17 +84,25 @@ export default function TeethTab({ numberActivate, numberTeeth, eventTooth }) {
                     {"<"}
                 </FirstTooth>
 
-                {
-                    handleNumberTeeth().map((i) => { <CenterTooth key={i} activate={numberActivate === i} onClick={handleSearch} title={i} >{i}</CenterTooth> })
-                }
+                {[0].map(() => {
+                    if (!isMin) {
+                        return <CenterTooth title="PL" key={0} onClick={handleExtreme}>...</CenterTooth>
+                    }
+                })}
 
                 {
-                    [0].map(() => {
-                        if (numberTeeth > 5) {
-                            return (<CenterTooth key={0} onClick={handleLast}>...</CenterTooth>)
-                        }
-                    })
+                    rangeTeeth.map((i) => <CenterTooth key={i} activate={numberActivate === i} onClick={handleSearch} title={i} >{i}</CenterTooth>)
                 }
+
+
+
+
+                {[0].map(() => {
+                    if (isMax) {
+                        return <CenterTooth title="PR" key={0} onClick={handleExtreme}>...</CenterTooth>
+                    }
+                })}
+
                 <LastTooth
                     onClick={handleArrow}
                     title="right">

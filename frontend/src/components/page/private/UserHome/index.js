@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Layout from "../../public/Layout"
 import { connect } from "react-redux"
 import { useHistory } from "react-router-dom"
@@ -9,6 +9,8 @@ import { ContainerUserHome, Title, SecondBarContainer, SearchBar, CreateStyle, S
 import IconStyle from "../../../utils/IconStyle"
 import TableTask from "./TableTask"
 
+import PageTask from "./TaskModal"
+
 import IconLens from "./lens.svg"
 
 const LensIconStyle = Styled(IconStyle)`
@@ -16,15 +18,26 @@ const LensIconStyle = Styled(IconStyle)`
     width: 42px;
     height:42px;
     border-radius: 0px 7px 7px 0px;
+    cursor:pointer;
 `
 
 function UserHome(props) {
     const history = useHistory()
+    const [state, setState] = useState({
+        isOpenCreate: false
+    })
+
     function handledLogOut() {
 
         props.logOut()
         localStorage.removeItem("token")
         history.push("/")
+    }
+
+
+    function handleTaskCreate() {
+        console.log("I passed to closeTask")
+        setState({ ...state, isOpenCreate: !state.isOpenCreate })
     }
     return (
         <Layout>
@@ -33,12 +46,13 @@ function UserHome(props) {
                     <Title> Task</Title>
                     <SearchBarContainer>
                         <SearchBar />
-                        <LensIconStyle><IconLens /></LensIconStyle>
+                        <LensIconStyle ><IconLens /></LensIconStyle>
                     </SearchBarContainer>
-                    <CreateStyle>+</CreateStyle>
+                    <CreateStyle onClick={handleTaskCreate}>+</CreateStyle>
                 </SecondBarContainer>
-                <TableTask/>
+                <TableTask />
             </ContainerUserHome>
+            <PageTask isOpen={state.isOpenCreate} eventClose={handleTaskCreate} />
         </Layout>)
 }
 
