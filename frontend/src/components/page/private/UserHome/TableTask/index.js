@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { Background, BarTitle, Title, TaskContainer, Typography, ToolContainer, Input, ContainerTable, TaskDescriptionBackground, IconTask, TitleDescreption, ContainerDescription, ParagraphDescription, TaskContainerMain } from "./Style"
 
 import ArrowRight from "./Icons/ArrowRight.svg"
@@ -9,6 +9,7 @@ import Styled from "styled-components"
 
 
 import TeethTab from "./TeethTab"
+import axios from "axios"
 
 
 
@@ -64,17 +65,17 @@ const IconRotate = Styled(IconStyle)`
     transform:${(props) => `rotate(${props.Rotate})`};
 `
 
-function TaskBar({ Company, Assigned, Name, EndDate, Description }) {
+function TaskBar({ company, assigned, name, endDate, description }) {
     const [open, setOpen] = useState(false)
 
     return (
         <TaskContainerMain>
             <TaskContainer>
                 <IconRotate Rotate={open ? "90deg" : "0deg"} onClick={() => { setOpen(!open) }}><ArrowRight /></IconRotate>
-                <Typography weight color={"#5988FF"}> {Name}</Typography>
-                <Typography> {Company}</Typography>
-                <Typography> {Assigned}</Typography>
-                <Typography> {EndDate}</Typography>
+                <Typography weight color={"#5988FF"}> {name}</Typography>
+                <Typography> {company}</Typography>
+                <Typography> {assigned}</Typography>
+                <Typography> {endDate}</Typography>
                 <Input />
                 <ToolContainer>
                     <IconStyle>
@@ -85,7 +86,7 @@ function TaskBar({ Company, Assigned, Name, EndDate, Description }) {
                     </IconStyle>
                 </ToolContainer>
             </TaskContainer>
-            <TaskDescription open={open} Title={Name} Description={Description} />
+            <TaskDescription open={open} Title={name} Description={description} />
         </TaskContainerMain>
     )
 }
@@ -94,24 +95,47 @@ function TaskBar({ Company, Assigned, Name, EndDate, Description }) {
 export default function TableTask() {
     const [state, setState] = useState({
         numberActivate: 1,
-        rangeTeeth: [1, 2, 3, 4, 5],
-        isMax: true,
+        rangeTeeth: [],
+        isMax: false,
         isMin: true,
         Tasks: createData(8),
     })
 
+   
 
-    function searchTasks(numberActivate) {
-        const Name = "Task " + numberActivate
-        let Tasks
-            try {
-                Tasks = createData(8, Name)
-            } catch (error) {
-                console.log(error)
-                return
+    const getTask = async function (numberActivate) {
+        let query
+        try {
+            query = await axios("/task/getTask", { method: "POST", data: { numberActivate } })
 
-            }
-        setState({ ...state, numberActivate, Tasks })
+        }
+        catch (err) {
+            console.log(err)
+            throw "Hay un error"
+        }
+        const { data } = query
+        console.log(data)
+        return data
+    }
+    
+    useEffect(() => {
+        async function fetch(){
+            const data =await getTask(state.numberActivate)
+            const { Tasks, rangeTeeth, isMax } = data
+            setState({ ...state, Tasks, rangeTeeth, isMax })
+        }
+        fetch()
+
+        
+    }, [])
+
+    async function searchTasks(numberActivate) {
+        const { Tasks, rangeTeeth, isMax } = await getTask(numberActivate)
+        let isMin=true
+        if (numberActivate>5){
+            isMin=false
+        }
+        setState({ ...state, numberActivate, Tasks, rangeTeeth, isMax,isMin })
     }
 
     return (
@@ -124,6 +148,7 @@ export default function TableTask() {
             </ContainerTable>
             <TeethTab
                 numberActivate={state.numberActivate}
+                //rangeTeeth={state.rangeTeeth}
                 rangeTeeth={state.rangeTeeth}
                 eventTooth={searchTasks}
                 isMax={state.isMax}

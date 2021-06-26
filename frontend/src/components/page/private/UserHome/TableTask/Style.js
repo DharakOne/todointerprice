@@ -15,6 +15,7 @@ export const ContainerTable = Styled.div`
     flex-direction:column;
     align-items:center;
     width:84.35%;
+    min-height: 430px;
 `
 
 //Task Title

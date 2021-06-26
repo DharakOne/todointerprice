@@ -1,71 +1,64 @@
-import React from "react"
+import React,{useState} from "react"
 import { createPortal } from "react-dom"
-import Styled from "styled-components"
 
-const ContainerModal = Styled.div`
-    display:flex;
-    z-index: 1; 
-    position: fixed; 
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4); 
-    justify-content:center;
-    align-items:center;
-`
-const TaskContainer = Styled.div`
-    width: max(300px,416px);
-    margin:0 5%;
-    height: 569px;
-    background: #FFFFFF;
-    border: 1px solid #25D366;
-    box-sizing: border-box;
-    border-radius: 8px;
-    display:flex;
-    flex-direction:column;
-`
-
-const Title=Styled.div`
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 28px;
-    text-align: center;
-    letter-spacing: 0.045em;
-    
-    color: #363636;
-`
-
-const ContainterInput =Styled.div`
-    width:90%;
-`
-
-const InputTitle=Styled.div`
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 16px;
-    text-align: center;
-    letter-spacing: 0.045em;
-
-    color: #818181;
-
-`
+import {
+    ContainerModal, TaskContainer, MarginContainer,
+    Title, InputTittle, ContainterInput, InputText,
+    InputArea,ContainerInputSelection,DoneInput,DateInput
+} from "./Style"
 
 export default function PageTask({ isOpen, eventClose }) {
+    const [state,setState]=useState({name:"",description:"",assigned:"",company:"",done:false,endDate:new Date()})
+
+    function catchChange(event) {
+        const data = event.target
+        setState({ ...state, [data.name]: data.value })
+    }
+
+    function handleSubmint(){
+       console.log("asas") 
+    }
+
     if (!isOpen) return null
+
     return createPortal(
         <ContainerModal>
             <TaskContainer>
-                <h3>Portal Prueba</h3>
-                <button onClick={eventClose}> buttom</button>
+                <MarginContainer>
+
+                    <Title>Portal Prueba</Title>
+                    <ContainterInput>
+                        <InputTittle>Name</InputTittle>
+                        <InputText value={state.name} onChange={catchChange} name="name" placeholder="Task Title" />
+                    </ContainterInput>
+
+                    <ContainterInput>
+                        <InputTittle>Description</InputTittle>
+                        <InputArea value={state.description} onChange={catchChange} name="description" />
+                    </ContainterInput>
+
+                    <ContainterInput>
+                        <InputTittle>Assigned</InputTittle>
+                        <InputText value={state.assigned} onChange={catchChange} name="assigned" placeholder="assigned name" />
+                    </ContainterInput>
+
+                    <ContainterInput>
+                        <InputTittle>Company</InputTittle>
+                        <InputText value={state.company} onChange={catchChange}  name="company" placeholder="company name" />
+                    </ContainterInput>
+                    <ContainerInputSelection>
+                        <InputTittle value={state.done}  onChange={catchChange} name="done" >Done</InputTittle>
+                        <InputTittle value={state.endDate} onChange={catchChange} name="endDate" >End Date</InputTittle>
+                        <DoneInput/>
+                        <DateInput/>
+                    </ContainerInputSelection>
+                    <button onClick={eventClose}> buttom</button>
+                </MarginContainer>
+
             </TaskContainer>
-        </ContainerModal>
+        </ContainerModal> 
         ,
         document.getElementById("portal")
     )
 }
+

@@ -10,7 +10,7 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/__pycache__": false,
+        "**/__pycache__": true,
         "**/**.pyc": true,
         "node_modules": true,
         ".theia":true

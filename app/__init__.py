@@ -22,10 +22,15 @@ CORS(app)
 
 
 from .user import user_app
+from .task import task_app
 
 app.register_blueprint(user_app,url_prefix="/user")
+app.register_blueprint(task_app,url_prefix="/task")
 
 
+
+
+#Test Routes
 @app.route('/')
 def hola_mundo():
 

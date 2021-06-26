@@ -6,7 +6,7 @@
   "scripts": {
     "built": "webpack --mode production",
     "dev": "webpack --mode development",
-    "start":"webpack-dev-server",
+    "start": "webpack-dev-server",
     "startg": "webpack-dev-server &&   -- -- 'public $(gp url 4000 | sed 's+https://++'):443'"
   },
   "repository": {
@@ -45,5 +45,5 @@
     "redux": "^4.0.5",
     "styled-components": "^5.1.1"
   },
-  "proxy":"https://3000-a8fdd359-8631-4bc6-88ab-a414bc9b7346.ws-us03.gitpod.io/"
+  "proxy": "https://3000-a8fdd359-8631-4bc6-88ab-a414bc9b7346.ws-us03.gitpod.io/"
 }

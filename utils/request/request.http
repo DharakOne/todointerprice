@@ -1,0 +1,45 @@
+@proxi=http://127.0.0.1:3000/
+
+###
+GET {{proxi}} HTTP/1.1
+
+###
+POST {{proxi}}/task/getTask HTTP/1.1
+content-type: application/json
+ 
+{
+    "numberActivate":3
+}
+###
+POST  {{proxi}}/task/createTask HTTP/1.1
+content-type: application/json
+
+{
+    "name":"first Task",
+    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga excepturi  porro quae rerum laborum! Ex fuga quaerat tenetur porro non necessitatibus at, animi, cumque, beatae dolores incidunt ipsam eos doloremque.",
+    "company":" JunComp",
+    "assigned":"Junior Castro",
+    "done":"false",
+    "createdDate":"2021-06-05T17:53:18.966256Z",
+    "endDate":"2021-09-05T17:53:18.966256Z"
+}
+###
+POST  {{proxi}}/task/getTask HTTP/1.1'
+content-type: application/json
+{
+    "name":"first Task",
+    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga excepturi  porro quae rerum laborum! Ex fuga quaerat tenetur porro non necessitatibus at, animi, cumque, beatae dolores incidunt ipsam eos doloremque.",
+    "company":" JunComp",
+    "assigned":"Junior Castro",
+    "done":"false",
+    "createdDate":"2021-06-05T17:53:18.966256Z",
+    "endDate":"2021-09-05T17:53:18.966256Z"
+}
+###
+
+GET  {{proxi}}/task/createData HTTP/1.1'
+
+###
+
+GET  {{proxi}}/task/pyEx HTTP/1.1'
+
