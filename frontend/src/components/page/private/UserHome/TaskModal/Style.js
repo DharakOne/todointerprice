@@ -16,7 +16,7 @@ export const ContainerModal = Styled.div`
 export const TaskContainer = Styled.div`
     width: max(300px,416px);
     margin:0 5%;
-    height: 569px;
+    height: 580px;
     background: #FFFFFF;
     border: 1px solid #25D366;
     box-sizing: border-box;
@@ -104,7 +104,36 @@ export const DoneInput = Styled.input.attrs(() => ({
 `
 
 export const DateInput = Styled.input.attrs(() => ({
-    type: "date"
+    type: "datetime-local"
 }))`
 `
+//Buttoms
 
+export const ContainerButtoms= Styled.div`
+    display:grid;
+    grid-template-columns: min-content min-content;
+    grid-column-gap: 10px;
+    justify-content:center;
+    margin-bottom: 10px;
+    margin-top:25px;
+`
+
+export const Buttom = Styled.div`
+    background: ${props => props.background } ;
+    cursor: pointer;
+    padding:8px 20px;
+    border-radius:12px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+
+    text-align: center;
+    letter-spacing: 0.045em;
+
+    color: #FFFFFF;
+
+
+`

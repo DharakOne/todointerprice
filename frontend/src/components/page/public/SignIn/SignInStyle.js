@@ -80,11 +80,3 @@ export const ButtomSumit = Styled.div.attrs({
     cursor: pointer;
 `
 
-
-export const BlockErrorContainer = Styled.div`
-    background:rgb(255, 143, 143);
-    color:rgb(231, 34, 34);
-    padding:3px;
-    font-weight: bold;
-    border-radius:4px;
-`

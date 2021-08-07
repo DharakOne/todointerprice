@@ -1,52 +1,5 @@
 import React, { useState } from "react"
-import Styled from "styled-components"
-
-
-const Background = Styled.div`
-    width:100%;
-    background:#F5F5F5;
-    padding:30px 0 30px;
-    display:flex;
-    justify-content:center;
-`
-
-const ContainerTeeth = Styled.div`
-    height:40px;
-    display:flex;
-`
-
-const Tooth = Styled.div`
-    width:40px;
-    background: ${(props) => props.activate ? "#FFA800" : "#FFFFFF"};
-    border: 1px solid #E5E5E5;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    cursor: pointer;
-
-
-    color:${(props) => props.activate ? "white" : "black"};
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 21px;
-`
-
-const FirstTooth = Styled(Tooth)`
-    border-radius: 10px 0px 0px 10px;
-`
-
-const LastTooth = Styled(Tooth)`
-    border-radius: 0px 10px 10px 0px;
-`
-
-const CenterTooth = Styled(Tooth)`
-
-`
-
-
+import {Background,ContainerTeeth,FirstTooth,CenterTooth,LastTooth} from "./Style"
 export default function TeethTab({ numberActivate, rangeTeeth, eventTooth, isMax = false, isMin = true }) {
 
     function handleSearch(e) {

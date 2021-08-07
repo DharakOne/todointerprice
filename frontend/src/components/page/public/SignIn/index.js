@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import axios from "axios"
 import { setUser } from "../../../../redux/user/action"
 import useApi from "../../../utils/apiHook"
+import BlockError from "../../../utils/BlockError"
 
 
 import Layout from "../Layout/index"
@@ -17,19 +18,10 @@ import {
     InputLabel,
     InputContainer,
     ButtomSumit,
-    BlockErrorContainer
 } from "./SignInStyle"
 
 
-function BlockError(props) {
-    if(!props.isError){
-        return null
-    }
-    return (
-        <BlockErrorContainer>
-            {props.errorMensage}
-        </BlockErrorContainer>)
-}
+
 
 function SignIn(props) {
     const [formData, formDataSet] = useState({

@@ -1,4 +1,6 @@
 import Styled from "styled-components"
+import IconStyle from "../../../../utils/IconStyle"
+
 
 export const Background = Styled.div`
     width:100%;
@@ -41,7 +43,13 @@ export const Title = Styled.label`
     color: #000000;
 `
 
-//TaskBar
+//TaskBar 
+
+
+
+export const IconRotate = Styled(IconStyle)`
+    transform:${(props) => `rotate(${props.Rotate})`};
+`
 export const  TaskContainerMain =Styled.div`
     width:100%;
 `
@@ -71,7 +79,7 @@ export const ToolContainer = Styled.div`
     width:46%;
     justify-content:space-between;
 `
-export const Input = Styled.input.attrs({ type: "checkbox" })`
+export const CheckInput =Styled.input.attrs({ type: "checkbox" })`
     
 `
 //Task Description

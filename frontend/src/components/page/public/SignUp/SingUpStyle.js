@@ -1,9 +1,9 @@
 import Styled from "styled-components"
 import Container from "../../../utils/Container"
-
+ 
 
 export const ContainerSingUp = Styled(Container)`
-    background: radial-gradient(54.05% 102.79% at 50% 50%, #9256DB 0%, #3A5CB4 100%);
+    background: radial-gradient(54.05% 102.79% at 50% 50%, #9256DB  0%, #3A5CB4 100%);
 `
 
 export const ContainerForm = Styled.form`

@@ -21,12 +21,14 @@ def createUser():
 @user_app.route('/signIn',methods=["POST"])
 def loginUser():
     data=request.get_json()
-    user=database[User.__name__].find_one({"email":data["email"]})
+    userData=database[User.__name__].find_one({"email":data["email"]})
+    print(userData["_id"])
     
-    if(user!=None):
-        user=LoadUserModel.load(user)
+    if(userData!=None):
+        user=LoadUserModel.load(userData)
+
         if user.verify_password(data["password"]):
-            access_token = create_access_token(identity={"userName":user.userName,"email":user.email})
+            access_token = create_access_token(identity={"userName":user.userName,"email":user.email,"_id":str (userData["_id"])})
             return {"token":access_token,"userName":user.userName,"email":user.email}
 
     return {"error":"Password or email is no valid."}, 422
@@ -35,4 +37,5 @@ def loginUser():
 @jwt_required()
 def get_user():
     current_user = get_jwt_identity()
+    print(current_user)
     return current_user

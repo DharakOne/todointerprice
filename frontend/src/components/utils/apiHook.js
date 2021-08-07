@@ -44,5 +44,5 @@ export default function useApi(time = 4500) {
             throw response
         }
     }
-    return {answer, waitAnswer, errorRequest, handeldEvent}
+    return {answer, waitAnswer, errorRequest, handeldEvent,setErrorRequest}
 }

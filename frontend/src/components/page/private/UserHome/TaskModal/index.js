@@ -1,62 +1,119 @@
-import React,{useState} from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { createPortal } from "react-dom"
 
 import {
     ContainerModal, TaskContainer, MarginContainer,
     Title, InputTittle, ContainterInput, InputText,
-    InputArea,ContainerInputSelection,DoneInput,DateInput
+    InputArea, ContainerInputSelection, DoneInput, DateInput, ContainerButtoms, Buttom
 } from "./Style"
+import BlockError from "../../../../utils/BlockError"
 
-export default function PageTask({ isOpen, eventClose }) {
-    const [state,setState]=useState({name:"",description:"",assigned:"",company:"",done:false,endDate:new Date()})
+
+import useApi from "../../../../utils/apiHook" 
+
+const initialState = { name: "", description: "", assigned: "", company: "", done: false }
+
+export default function CreateTaskModal({ isOpen, eventClose }) {
+    const [state, setState] = useState(initialState)
+    const dateRef = useRef(null)
+    const { waitAnswer, handeldEvent, errorRequest, setErrorRequest } = useApi(4000)
+
 
     function catchChange(event) {
-        const data = event.target
-        setState({ ...state, [data.name]: data.value })
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+
+        setState({ ...state, [name]: value })
     }
 
-    function handleSubmint(){
-       console.log("asas") 
+    function handleCancel() {
+        if (waitAnswer) {
+            return
+        }
+        eventClose()
+        setErrorRequest(false)
     }
+
+    async function handleSubmint(e) {
+        if (!(e.keyCode == 13 || e.target.title == "submit") || waitAnswer) {
+            return
+        }
+
+        console.log(waitAnswer)
+        try {
+
+            let myrefDateValue = dateRef.current.value
+            let EndDate = Date.parse(myrefDateValue)
+            EndDate = new Date(EndDate)
+            EndDate = EndDate.toISOString()
+            const dataForm = { ...state, endDate: EndDate, createdDate: new Date() }
+            await handeldEvent({ url: "task/createTask", method: "post", config: { data: dataForm } })
+            handleCancel()
+            setState(initialState)
+
+        } catch (error) {
+            console.log("Hubo un error")
+            console.log(error)
+            setErrorRequest(true)
+        }
+    }
+
+
+
+
 
     if (!isOpen) return null
 
     return createPortal(
         <ContainerModal>
-            <TaskContainer>
-                <MarginContainer>
+            <form >
+                <TaskContainer>
+                    <MarginContainer>
 
-                    <Title>Portal Prueba</Title>
-                    <ContainterInput>
-                        <InputTittle>Name</InputTittle>
-                        <InputText value={state.name} onChange={catchChange} name="name" placeholder="Task Title" />
-                    </ContainterInput>
+                        <Title>Portal Prueba</Title>
+                        <ContainterInput>
+                            <InputTittle>Name</InputTittle>
+                            <InputText onKeyUp={handleSubmint} value={state.name} onChange={catchChange} name="name" placeholder="Task Title" />
+                        </ContainterInput>
 
-                    <ContainterInput>
-                        <InputTittle>Description</InputTittle>
-                        <InputArea value={state.description} onChange={catchChange} name="description" />
-                    </ContainterInput>
+                        <ContainterInput>
+                            <InputTittle>Description</InputTittle>
+                            <InputArea onKeyUp={handleSubmint} value={state.description} onChange={catchChange} name="description" />
+                        </ContainterInput>
 
-                    <ContainterInput>
-                        <InputTittle>Assigned</InputTittle>
-                        <InputText value={state.assigned} onChange={catchChange} name="assigned" placeholder="assigned name" />
-                    </ContainterInput>
+                        <ContainterInput>
+                            <InputTittle>Assigned</InputTittle>
+                            <InputText onKeyUp={handleSubmint} value={state.assigned} onChange={catchChange} name="assigned" placeholder="assigned name" />
+                        </ContainterInput>
 
-                    <ContainterInput>
-                        <InputTittle>Company</InputTittle>
-                        <InputText value={state.company} onChange={catchChange}  name="company" placeholder="company name" />
-                    </ContainterInput>
-                    <ContainerInputSelection>
-                        <InputTittle value={state.done}  onChange={catchChange} name="done" >Done</InputTittle>
-                        <InputTittle value={state.endDate} onChange={catchChange} name="endDate" >End Date</InputTittle>
-                        <DoneInput/>
-                        <DateInput/>
-                    </ContainerInputSelection>
-                    <button onClick={eventClose}> buttom</button>
-                </MarginContainer>
+                        <ContainterInput>
+                            <InputTittle>Company</InputTittle>
+                            <InputText onKeyUp={handleSubmint} value={state.company} onChange={catchChange} name="company" placeholder="company name" />
+                        </ContainterInput>
+                        <ContainerInputSelection>
+                            <InputTittle  >Done</InputTittle>
+                            <InputTittle name="endDate" >End Date</InputTittle>
+                            <DoneInput checked={state.done} onChange={catchChange} name="done" />
+                            <DateInput ref={dateRef} />
+                        </ContainerInputSelection>
 
-            </TaskContainer>
-        </ContainerModal> 
+                        <ContainerButtoms>
+                            <Buttom onClick={handleCancel} background="rgba(255, 79, 79, 1)" >
+                                cancel
+                            </Buttom>
+                            <Buttom onClick={handleSubmint} background={waitAnswer ? "rgb(38,73,169)" : "rgba(89, 136, 255, 1)"} title="submit" >
+                                save
+                            </Buttom>
+                        </ContainerButtoms>
+
+                        <BlockError errorMensage="Please enter a valid task." isError={errorRequest} />
+
+                    </MarginContainer>
+                </TaskContainer>
+            </form>
+        </ContainerModal>
         ,
         document.getElementById("portal")
     )

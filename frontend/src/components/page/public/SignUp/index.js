@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState,useRef } from "react"
 import DatePicker from "react-datepicker"
 import useApi from "../../../utils/apiHook"
 
@@ -15,7 +15,7 @@ import {
 
 export default function SignUp() {
     const [startDate, setStartDate] = useState( new Date());
-    const [formData, formDataSet] = useState({
+    const Dataref = useRef({
         userName: "",
         companyName: "",
         email: "",
@@ -26,9 +26,9 @@ export default function SignUp() {
     })
     const {answer, waitAnswer, errorRequest, handeldEvent} = useApi(1000)
     
-    function catchChange(event) {
+    function handle(event) {
         let data = event.target
-        formDataSet({ ...formData, [data.name]: data.value })
+        Dataref.current ={ ...Dataref.current, [data.name]: data.value }
     }
 
     async function createNewUser() {
