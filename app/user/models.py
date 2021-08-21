@@ -44,14 +44,11 @@ def emailUniqueValidate(value:str):
 
 
 class User(Model):
-    def __init__(self,userName,email,companyName,phoneNumber,birthday,password_hash,gender,creation_date,last_update_date,**kwargs):
+    def __init__(self,userName,email,phoneNumber,password_hash,creation_date,last_update_date,**kwargs):
 
         self.userName=userName 
         self.email = email
-        self.companyName=companyName
         self.phoneNumber=phoneNumber
-        self.birthday=birthday
-        self.gender=gender
         self.password_hash=password_hash
         self.creation_date=creation_date
         self.last_update_date=last_update_date
@@ -65,10 +62,7 @@ class User(Model):
 class UserSchema(Schema):
     userName = fields.Str(required=True,validate=[stringValidate("User Name")])
     email = fields.Email(required=True)
-    birthday = fields.DateTime(required=True,format="%Y-%m-%dT%H:%M:%S.%fZ")
-    gender=fields.String(required=True,validate=oneOfValidate("gender",["male", "female"]))
     phoneNumber=fields.String(required=True,validate=[validate.Length(min=8),phoneNumberValidate])
-    companyName=fields.String(required=True,validate=stringValidate("Company Name"))
     creation_date=fields.DateTime(required=True,format="%Y-%m-%dT%H:%M:%S.%fZ")
     last_update_date=fields.DateTime(required=True,format="%Y-%m-%dT%H:%M:%S.%fZ")
 
@@ -81,9 +75,10 @@ class CreateUserSchema(UserSchema):
     vPassword=fields.String(required=True)
     
     @pre_load
-    def verify_password(self, data, **kwargs):
+    def verify_data_pre_load(self, data, **kwargs):
         emailUniqueValidate(data["email"])
         stringValidate("Password",min=5)(data["password"])
+
         if not (data["vPassword"]==data["password"]):
             error={"errors":["Password and Verify password is not same."]}
             raise ValidationError(error)

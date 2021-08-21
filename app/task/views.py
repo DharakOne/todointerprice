@@ -55,7 +55,6 @@ def getTask():
         rexFilter={"name":{'$regex':data["filter"]["name"],"$options" : "i"}}
         filter = {**dataUser, **rexFilter}
 
-    print(filter)
     getData = TaskDatabase.find(filter).skip((numberActivate-1)*8).limit(8)
     getData = list(getData)
     numDocuments = TaskDatabase.find({"idUser": userId}).count()
@@ -77,7 +76,7 @@ def getTask():
         rangeTeeth.append((ceil(numberActivate/5)-1)*5+i)
     for i in getData:
         i["_id"] = str(i["_id"])
-
+    print('rangeTeeth {}'.format (rangeTeeth) )
     return {"Tasks": getData, "nu": numDocuments, "rangeTeeth": rangeTeeth, "isMax": isMaxRange}
 
 
@@ -97,7 +96,7 @@ def manyExample():
 
 
 @task_app.route("searhTask", methods=["POST"])
-def getTaskSearch():
+async def getTaskSearch():
     current_user = get_jwt_identity()
     userId = current_user['_id']
     data = request.get_json()
@@ -107,10 +106,10 @@ def getTaskSearch():
         print("name is null")
 
 
-    getData = TaskDatabase.find({"idUser": userId, "name": name}).skip(
+    getData =  await TaskDatabase.find({"idUser": userId, "name": name}).skip(
         (numberActivate-1)*8).limit(8)
     getData = list(getData)
-    numDocuments = TaskDatabase.find({"idUser": userId}).count()
+    numDocuments = await TaskDatabase.find({"idUser": userId}).count()
     maxPage = ceil(numDocuments/8)
     maxRange = 0
     isMaxRange = False
@@ -129,5 +128,7 @@ def getTaskSearch():
         rangeTeeth.append((ceil(numberActivate/5)-1)*5+i)
     for i in getData:
         i["_id"] = str(i["_id"])
-
-    return {"Tasks": getData, "nu": numDocuments, "rangeTeeth": rangeTeeth, "isMax": isMaxRange}
+        dataRequest={"Tasks": getData, "nu": numDocuments, "rangeTeeth": rangeTeeth, "isMax": isMaxRange}
+        print(dataRequest)
+    return dataRequest
+ 

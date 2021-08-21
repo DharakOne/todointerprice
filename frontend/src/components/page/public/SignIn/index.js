@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom"
 import { connect } from "react-redux"
-import axios from "axios"
 import { setUser } from "../../../../redux/user/action"
 import useApi from "../../../utils/apiHook"
 import BlockError from "../../../utils/BlockError"
@@ -81,7 +80,7 @@ function SignIn(props) {
     )
 }
 
-
+ 
 const mapDispatchToProps = {
     setUser
 }

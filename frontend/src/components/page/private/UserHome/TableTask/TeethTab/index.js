@@ -1,5 +1,7 @@
 import React, { useState } from "react"
-import {Background,ContainerTeeth,FirstTooth,CenterTooth,LastTooth} from "./Style"
+import { Background, ContainerTeeth, FirstTooth, CenterTooth, LastTooth } from "./Style"
+
+
 export default function TeethTab({ numberActivate, rangeTeeth, eventTooth, isMax = false, isMin = true }) {
 
     function handleSearch(e) {
@@ -10,9 +12,9 @@ export default function TeethTab({ numberActivate, rangeTeeth, eventTooth, isMax
     function handleArrow(e) {
         const title = e.target.getAttribute("title")
         const number = title === "right" ? numberActivate + 1 : numberActivate - 1
-        const lastTeeh=rangeTeeth[rangeTeeth.length - 1]
-        if(isMax && (lastTeeh<number)){
-            return 
+        const lastTeeh = rangeTeeth[rangeTeeth.length - 1]
+        if (isMax && (lastTeeh < number)) {
+            return
         }
         if (numberActivate <= 1 && title === "left") {
             return
@@ -26,17 +28,16 @@ export default function TeethTab({ numberActivate, rangeTeeth, eventTooth, isMax
             const number = rangeTeeth[0] - 1
             eventTooth(number)
         } else {
-            const lastTeeh=rangeTeeth[rangeTeeth.length - 1]
+            const lastTeeh = rangeTeeth[rangeTeeth.length - 1]
             const number = lastTeeh + 1
             console.log("aa")
-            if(isMax && (lastTeeh<number)){
-                return 
+            if (isMax && (lastTeeh < number)) {
+                return
             }
             eventTooth(number)
         }
 
     }
-
 
     return (
         <Background>
@@ -46,24 +47,14 @@ export default function TeethTab({ numberActivate, rangeTeeth, eventTooth, isMax
                     {"<"}
                 </FirstTooth>
 
-                {[0].map(() => {
-                    if (!isMin) {
-                        return <CenterTooth title="PL" key={0} onClick={handleExtreme}>...</CenterTooth>
-                    }
-                })}
+                {!isMin && <CenterTooth title="PL" key={0} onClick={handleExtreme}>...</CenterTooth>}
 
                 {
+
                     rangeTeeth.map((i) => <CenterTooth key={i} activate={numberActivate === i} onClick={handleSearch} title={i} >{i}</CenterTooth>)
                 }
+                {!isMax && <CenterTooth title="PR" key={0} onClick={handleExtreme}>...</CenterTooth>}
 
-
-
-
-                {[0].map(() => {
-                    if (!isMax) {
-                        return <CenterTooth title="PR" key={0} onClick={handleExtreme}>...</CenterTooth>
-                    }
-                })}
 
                 <LastTooth
                     onClick={handleArrow}

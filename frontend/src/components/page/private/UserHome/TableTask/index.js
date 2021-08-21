@@ -1,4 +1,4 @@
-import React,{useState} from "react"
+import React, { useState } from "react"
 
 import useFetchTable from "./useFetchTable"
 
@@ -12,22 +12,21 @@ import {
 
 
 function TableTask() {
-    const { state,upDateFilterOut, searchTasks } = useFetchTable("/task/getTask")
-
+    const { state, upDateFilterOut, searchTasks } = useFetchTable("/task/getTask")
 
 
     return (
-            <Background>
-                <SearchBar upDateFilterOut={upDateFilterOut}/>
-                <ContainerTable>
+        <Background>
+            <SearchBar upDateFilterOut={upDateFilterOut} />
+            <ContainerTable>
 
-                    <BarTitle>
-                        {[" ", "Name", "Company", "Assigned", "End Date", "Done", ""].map((e, index) => <Title key={index}> {e}</Title>)}
-                    </BarTitle>
-                    {state.Tasks.map((props, index) => <TaskBar key={index}  {...props} />)}
-                </ContainerTable>
-
-                {state.Tasks.length && <TeethTab
+                <BarTitle>
+                    {[" ", "Name", "Company", "Assigned", "End Date", "Done", ""].map((e, index) => <Title key={index}> {e}</Title>)}
+                </BarTitle>
+                {state.Tasks.map((props, index) => <TaskBar key={index}  {...props} />)}
+            </ContainerTable>
+            {state.Tasks.length > 0 &&
+                <TeethTab
                     numberActivate={state.numberActivate}
                     rangeTeeth={state.rangeTeeth}
                     eventTooth={searchTasks}
@@ -35,7 +34,7 @@ function TableTask() {
                     isMin={state.isMin}
                 />}
 
-            </Background>
+        </Background>
     )
 }
 
