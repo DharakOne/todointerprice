@@ -7,6 +7,7 @@ import PageExample from "../components/page/public/PageExample"
 import Price from "../components/page/public/Price"
 import SingUp from "../components/page/public/newSignUp"
 import UserHome from "../components/page/private/UserHome"
+import Profile from "../components/page/private/Profile"
 
 
 
@@ -15,7 +16,11 @@ export default function configRoutes(user) {
         {
             path: "/user",
             component: user ? <UserHome /> : <Redirect to="/" />
-        }
+        },
+        {
+            path: "/Profile",
+            component: user ? <Profile /> : <Redirect to="/" />
+        },
     ]
     const publics = [
         {

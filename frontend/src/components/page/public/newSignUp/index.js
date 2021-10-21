@@ -13,6 +13,7 @@ import {
 
 import useApi from "../../../utils/apiHook"
 import  useStructureForm  from "./useStructureForm"
+import { useHistory } from "react-router"
 
 
 
@@ -20,6 +21,7 @@ export default function SignUp() {
     const {refForm,getDataRef}=useStructureForm()
     const checkBoxRef = useRef()
     const {waitAnswer, errorRequest, handeldEvent } = useApi(1000)
+    const history=useHistory()
 
 
     async function handleForm(event) {
@@ -36,6 +38,7 @@ export default function SignUp() {
 
         try {
             await handeldEvent({ url: "user/signUp", method: "post", config: { data } })
+            history.push("/SingIn")
 
         } catch (error) {
             console.log(` aa ${error.errors}`)

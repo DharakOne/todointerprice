@@ -1,6 +1,8 @@
-import React, { useState } from "react"
+import React, {useEffect} from "react"
+import { useSelector, useDispatch } from "react-redux"
 
-import useFetchTable from "./useFetchTable"
+import {getFilterTasks} from "../../../../../redux/task/action"
+
 
 import TaskBar from "./TaskBar"
 import TeethTab from "./TeethTab"
@@ -12,8 +14,20 @@ import {
 
 
 function TableTask() {
-    const { state, upDateFilterOut, searchTasks } = useFetchTable("/task/getTask")
+    const { table,filter} = useSelector(state => state.task)
+    const dispach = useDispatch()
 
+    function upDateFilterOut (filter){
+        dispach(getFilterTasks({numberActivate:1, filter}))
+    }
+
+    function changePageTask(numberActivate){
+        dispach(getFilterTasks({numberActivate,filter}))
+    }
+
+    useEffect(() => {
+        dispach(getFilterTasks({numberActivate:1,filter:{name:""}}))
+    }, [dispach])
 
     return (
         <Background>
@@ -23,15 +37,15 @@ function TableTask() {
                 <BarTitle>
                     {[" ", "Name", "Company", "Assigned", "End Date", "Done", ""].map((e, index) => <Title key={index}> {e}</Title>)}
                 </BarTitle>
-                {state.Tasks.map((props, index) => <TaskBar key={index}  {...props} />)}
+                {table.Tasks.map((props, index) => <TaskBar key={index}  {...props} />)}
             </ContainerTable>
-            {state.Tasks.length > 0 &&
+            {table.Tasks.length > 0 &&
                 <TeethTab
-                    numberActivate={state.numberActivate}
-                    rangeTeeth={state.rangeTeeth}
-                    eventTooth={searchTasks}
-                    isMax={state.isMax}
-                    isMin={state.isMin}
+                    numberActivate={table.numberActivate}
+                    rangeTeeth={table.rangeTeeth}
+                    eventTooth={changePageTask}
+                    isMax={table.isMax}
+                    isMin={table.isMin}
                 />}
 
         </Background>
