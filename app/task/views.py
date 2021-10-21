@@ -45,6 +45,7 @@ def getTask():
     userId = current_user['_id']
 
     data = request.get_json()
+    print(data)
     numberActivate = data["numberActivate"]
     dataUser = {"idUser": userId}
 
@@ -79,56 +80,3 @@ def getTask():
     print('rangeTeeth {}'.format (rangeTeeth) )
     return {"Tasks": getData, "nu": numDocuments, "rangeTeeth": rangeTeeth, "isMax": isMaxRange}
 
-
-@task_app.route("/pyEx", methods=["GET"])
-def manyExample():
-    new_posts = [
-        {"author": "Mike", "text": "Another post!",
-         "tags": ["bulk", "insert"],
-         "date": datetime.datetime(2009, 11, 12, 11, 14)},
-        {"author": "Eliot",
-         "title": "MongoDB is fun",
-         "text": "and pretty easy too!",
-         "date": datetime.datetime(2009, 11, 10, 10, 45)}]
-
-    TaskDatabase.insert_many(new_posts)
-    return {"menssage": "Data created succefully"}
-
-
-@task_app.route("searhTask", methods=["POST"])
-async def getTaskSearch():
-    current_user = get_jwt_identity()
-    userId = current_user['_id']
-    data = request.get_json()
-    numberActivate = data["numberActivate"]
-    name = data["name"]
-    if(name=={}):
-        print("name is null")
-
-
-    getData =  await TaskDatabase.find({"idUser": userId, "name": name}).skip(
-        (numberActivate-1)*8).limit(8)
-    getData = list(getData)
-    numDocuments = await TaskDatabase.find({"idUser": userId}).count()
-    maxPage = ceil(numDocuments/8)
-    maxRange = 0
-    isMaxRange = False
-    if (ceil(maxPage/5)*5-numberActivate) < 5:
-        maxRange = maxPage - (ceil(maxPage/5)-1)*5
-        isMaxRange = True
-        if(numDocuments == 0):
-            maxRange = 0
-
-    else:
-        isMaxRange = False
-        maxRange = 5
-
-    rangeTeeth = []
-    for i in range(1, maxRange+1):
-        rangeTeeth.append((ceil(numberActivate/5)-1)*5+i)
-    for i in getData:
-        i["_id"] = str(i["_id"])
-        dataRequest={"Tasks": getData, "nu": numDocuments, "rangeTeeth": rangeTeeth, "isMax": isMaxRange}
-        print(dataRequest)
-    return dataRequest
- 

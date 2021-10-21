@@ -5,7 +5,6 @@ from app.utils.model import Model
 from app import database
 
 
-
 def stringValidate(nameProperty,min=1,max=255):
     def callback(value):
         errors = {}
@@ -23,12 +22,6 @@ def oneOfValidate(nameProperty,list):
             raise ValidationError("Please choose a valid value  to {} ".format(nameProperty))
     return callback
 
-def phoneNumberValidate(value):
-    try: 
-        int(value)
-    except:
-        raise ValidationError("Please enter a valid number to phone number")
-
 def emailUniqueValidate(value:str):
     error:str =None
     if not (value.find(".com")!=-1 and value.find("@")!=-1):
@@ -36,12 +29,15 @@ def emailUniqueValidate(value:str):
             raise ValidationError(error)
     
     if database["User"].find_one({"email":value}):
-        
-        error={"error":["Email already have create. Please enter other email"]}
+        error={"email":["Email already has been created. Please enter other email."]}
+        raise ValidationError(error) 
+
+def phoneNumberValidate(value):
+    try: 
+        int(value)
+    except:
+        error={"phoneNumber":["Please enter a valid number to phone number"]}
         raise ValidationError(error)
-    
-
-
 
 class User(Model):
     def __init__(self,userName,email,phoneNumber,password_hash,creation_date,last_update_date,**kwargs):
@@ -62,7 +58,7 @@ class User(Model):
 class UserSchema(Schema):
     userName = fields.Str(required=True,validate=[stringValidate("User Name")])
     email = fields.Email(required=True)
-    phoneNumber=fields.String(required=True,validate=[validate.Length(min=8),phoneNumberValidate])
+    phoneNumber=fields.String(required=True,validate=[validate.Length(min=8)])
     creation_date=fields.DateTime(required=True,format="%Y-%m-%dT%H:%M:%S.%fZ")
     last_update_date=fields.DateTime(required=True,format="%Y-%m-%dT%H:%M:%S.%fZ")
 
@@ -105,6 +101,20 @@ class LoadUserShema(UserSchema):
     @post_dump
     def make_dict(self,data,**kwargs):
         return data
+
+
+class EdictUserShema(Schema):
+    email=fields.Email()
+    phoneNumber=fields.String(validate=[validate.Length(max=8)])
+    userName=fields.String(validate=[validate.Length(min=1,max=100)])
+    password_hash=fields.String()
+    
+    @pre_load
+    def preload(self,data,**kwargs):
+        if "newPassword" in data :
+            data["password_hash"]=generate_password_hash(data["newPassword"])
+        return data
+
 
 CreateUserModel= CreateUserSchema()
 LoadUserModel=LoadUserShema()

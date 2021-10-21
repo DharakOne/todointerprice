@@ -1,5 +1,8 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef } from "react"
 import { createPortal } from "react-dom"
+import { useDispatch } from "react-redux"
+
+import { getFilterTasks } from "../../../../../redux/task/action"
 
 import {
     ContainerModal, TaskContainer, MarginContainer,
@@ -14,6 +17,7 @@ import useApi from "../../../../utils/apiHook"
 const initialState = { name: "", description: "", assigned: "", company: "", done: false }
 
 export default function CreateTaskModal({ isOpen, eventClose }) {
+    const dispatch= useDispatch()
     const [state, setState] = useState(initialState)
     const dateRef = useRef(null)
     const { waitAnswer, handeldEvent, errorRequest, setErrorRequest } = useApi(4000)
@@ -52,6 +56,7 @@ export default function CreateTaskModal({ isOpen, eventClose }) {
             await handeldEvent({ url: "task/createTask", method: "post", config: { data: dataForm } })
             handleCancel()
             setState(initialState)
+            dispatch(getFilterTasks({numberActivate:1,filter:{name:""}}))
 
         } catch (error) {
             console.log("Hubo un error")
@@ -118,4 +123,3 @@ export default function CreateTaskModal({ isOpen, eventClose }) {
         document.getElementById("portal")
     )
 }
-
