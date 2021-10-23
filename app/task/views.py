@@ -78,3 +78,19 @@ def getTask():
         i["_id"] = str(i["_id"])
     return {"Tasks": getData, "nu": numDocuments, "rangeTeeth": rangeTeeth, "isMax": isMaxRange}
 
+@task_app.route("/deleteTask", methods=["POST"])
+@jwt_required()
+def deleteTask():
+    current_user = get_jwt_identity()
+    userId = current_user['_id']
+
+    data = request.get_json()
+    idTask=data["idTask"]
+    _id=ObjectId(idTask)
+
+    dataUser = {"idUser": userId}
+    print(idTask)
+    TaskDatabase.delete_one({"_id":_id})
+    print("Delete was completed")
+
+    return {"Task Was Delete":"sd"}

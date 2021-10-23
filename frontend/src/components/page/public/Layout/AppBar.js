@@ -13,7 +13,6 @@ function ButtonLogout(prop) {
     const dispacth=useDispatch()
     function handleLogout() {
         dispacth(logOut())
-        localStorage.removeItem("token")
     }
     if (!email){
         return null

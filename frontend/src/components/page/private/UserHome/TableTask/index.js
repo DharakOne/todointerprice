@@ -39,6 +39,7 @@ function TableTask() {
                 </BarTitle>
                 {table.Tasks.map((props, index) => <TaskBar key={index}  {...props} />)}
             </ContainerTable>
+            
             {table.Tasks.length > 0 &&
                 <TeethTab
                     numberActivate={table.numberActivate}

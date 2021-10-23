@@ -1,19 +1,19 @@
 @proxi=https://3000-teal-spider-53thcne1.ws-us17.gitpod.io
-@token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYzNDc3NDQ2OCwianRpIjoiZjBhMjA0YTctM2NmOS00ZDZkLTk5ODMtZGJjNTkwYjNlMzEzIiwibmJmIjoxNjM0Nzc0NDY4LCJ0eXBlIjoiYWNjZXNzIiwic3ViIjp7InVzZXJOYW1lIjoiSGVsaW9zIiwiZW1haWwiOiJqdW5pb3JAZ21haWwuY29tIiwiX2lkIjoiNjE2MWU1NTI2OTBkNzY0NDNlZTlkZmM1In0sImV4cCI6MTYzNDc3NTM2OH0.4NaHoWNYlLAHjdxx46IYRofzqLeGy82fbzpfwvIzRVc
-
+@token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYzNTAwODk1OSwianRpIjoiY2JiZjE5MjEtODFkMS00MWE2LTk1ODItODA2Y2U1NWQ3YWFjIiwibmJmIjoxNjM1MDA4OTU5LCJ0eXBlIjoiYWNjZXNzIiwic3ViIjp7InVzZXJOYW1lIjoiSGVsaW9zIiwiZW1haWwiOiJqdW5pb3JAZ21haWwuY29tIiwiX2lkIjoiNjE2MWU1NTI2OTBkNzY0NDNlZTlkZmM1In0sImV4cCI6MTYzNTAwOTU1OX0.xx-ltFcVMSV0cYfhKqBwTNaZN3bnR8iXcW1m__XE3uk
+###
 POST  {{proxi}}/user/signIn HTTP/1.1
 content-type: application/json
-
+ 
 {
     "email":"junior@gmail.com",
     "password":"castro"
 }
-
-POST  {{proxi}}/user/signIn HTTP/1.1
+###
+POST  {{proxi}}/task/getTask HTTP/1.1
 content-type: application/json
-
+Authorization: Bearer {{token}}
 
 {
-    "numberActive":"junior@gmail.com",
+    "numberActivate":1,
     "filter":{"name":""}
 }
