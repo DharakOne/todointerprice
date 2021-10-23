@@ -12,6 +12,7 @@ export function setUser({userName,email}){
 }
 
 export function  logOut(){
+    localStorage.removeItem("token")
     return{
         type:type.LOG_OUT,
     }

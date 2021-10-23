@@ -35,7 +35,7 @@ function AppBar(props) {
     useEffect(
 
         function () {
-            const listlink = props.user.email ? ["/user", "User Home", "/Price", "Price","Profile","Profile"] : ["/SingUp", "Sing Up", "/Price", "Price", "/SingIn", "Sing In", "/PageExample/About", "About"]
+            const listlink = props.user.email ? ["/Price", "Price","Profile","Profile"] : ["/SingUp", "Sing Up", "/Price", "Price", "/SingIn", "Sing In", "/PageExample/About", "About"]
             const linksOn = []
             const pathname = location.pathname
             const idRemove = listlink.indexOf(pathname)

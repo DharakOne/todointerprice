@@ -1,16 +1,12 @@
 import React from "react"
 import Layout from "../Layout/index"
 import { connect } from "react-redux"
-
-
-
 import { Background, ContainerSignUp, HeadContainer, HeadTitle, ButtomSubmit, FomrContainer } from "../newSignUp/Style"
 import InputText from "../newSignUp/InputText"
-
 import useStructureForm from "../newSignUp/useStructureForm"
 import useApi from "../../../utils/apiHook"
-
 import { setUser } from "../../../../redux/user/action"
+import BlockError from "../../../utils/BlockError"
 
 
 
@@ -19,14 +15,14 @@ function SignIn(props) {
     const { waitAnswer, handeldEvent, errorRequest } = useApi(1000)
     async function formHandeld(event) {
 
+        if(waitAnswer){
+            return
+        }
         event.preventDefault()
-
-        console.log("n   jhbjhbjh")
         const data = getDataRef()
-        console.log(data)
+
         try {
             const  dataRequest = await (await handeldEvent({ url: "user/signIn", method: "post", config: { data } })).data
-            console.log(dataRequest)
             const { userName, token, email } = dataRequest
             localStorage.setItem("token", token)
             props.setUser({ userName, email })
@@ -34,7 +30,6 @@ function SignIn(props) {
 
         } catch (error) {
             console.log("Hubo un error")
-            console.log(error)
         }
     }
 
@@ -49,7 +44,6 @@ function SignIn(props) {
                     </HeadContainer>
                     <form ref={refForm}
                         onSubmit={formHandeld}>
-                    
                         <FomrContainer>
                             <InputText labelName="Email" name="email" />
                             <InputText labelName="Password" type="password" name="password" />
@@ -57,7 +51,8 @@ function SignIn(props) {
                         </FomrContainer>
                     </form>
 
-                    <ButtomSubmit type="submit" onClick={formHandeld}>Sign In</ButtomSubmit>
+                    <ButtomSubmit waitAnswer={waitAnswer} type="submit" onClick={formHandeld}>Sign In</ButtomSubmit>
+                    <BlockError isError={errorRequest} errorMensage={"There are a error with your password or email."}/>
                 </ContainerSignUp>
 
             </Background>

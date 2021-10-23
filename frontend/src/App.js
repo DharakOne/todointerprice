@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"
 import { Switch } from "react-router-dom"
 import { connect } from "react-redux"
-import axios from "axios"
 import AppContainer from "./components/utils/Container"
 import configRoutes from "./config/routes"
 import RoutersComponets from "./components/utils/RoutersComponets"
@@ -32,7 +31,6 @@ function App(props) {
 
 
             } catch (error) {
-                console.log("user is not aunteticated")
                 if (!props.user.loadUser) {
                     props.setUser(
                         { userName: null, email: null })

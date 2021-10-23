@@ -45,7 +45,6 @@ def getTask():
     userId = current_user['_id']
 
     data = request.get_json()
-    print(data)
     numberActivate = data["numberActivate"]
     dataUser = {"idUser": userId}
 
@@ -56,7 +55,7 @@ def getTask():
         rexFilter={"name":{'$regex':data["filter"]["name"],"$options" : "i"}}
         filter = {**dataUser, **rexFilter}
 
-    getData = TaskDatabase.find(filter).skip((numberActivate-1)*8).limit(8)
+    getData = TaskDatabase.find(filter).sort("_id",DESCENDING).skip((numberActivate-1)*8).limit(8)
     getData = list(getData)
     numDocuments = TaskDatabase.find({"idUser": userId}).count()
     maxPage = ceil(numDocuments/8)
@@ -77,6 +76,5 @@ def getTask():
         rangeTeeth.append((ceil(numberActivate/5)-1)*5+i)
     for i in getData:
         i["_id"] = str(i["_id"])
-    print('rangeTeeth {}'.format (rangeTeeth) )
     return {"Tasks": getData, "nu": numDocuments, "rangeTeeth": rangeTeeth, "isMax": isMaxRange}
 
