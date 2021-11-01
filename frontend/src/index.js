@@ -9,7 +9,7 @@ import StoreApp from "./redux/StoreApp"
 import {logOut} from "./redux/user/action"
 import App from "./App"
 
-axios.defaults.baseURL = 'https://3000-teal-spider-53thcne1.ws-us17.gitpod.io/';
+axios.defaults.baseURL = 'https://3000-teal-spider-53thcne1.ws-us18.gitpod.io/';
 
 
 
@@ -37,9 +37,7 @@ axios.interceptors.response.use(response=>{
     }
     console.log("eror response")
     return Promise.reject(error)
-
-}
-)
+})
 
 
 

@@ -9,6 +9,7 @@ const IconStyle = Styled.div`
     background:${props=>props.background?props.background:"none"};
     width:${props=>props.width ? props.width : "24px"};
     height:${props=>props.height ? props.height : "24px"};
+    cursor:${props=>props.cursor ? props.cursor: "default"}
 `
- 
+
 export default IconStyle

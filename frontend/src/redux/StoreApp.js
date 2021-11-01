@@ -7,11 +7,10 @@ const middlewareEnhancer = applyMiddleware(ReduxThunk)
 const reduxTool=  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 const composedEnhancers = compose(middlewareEnhancer, reduxTool)
 
-  
 const StoreApp = createStore(
     combineReducers({
         user: UserReducer,
         task: TaskReducer
-    }),undefined,composedEnhancers)
-    
+    }),undefined,middlewareEnhancer)
+     
 export default StoreApp

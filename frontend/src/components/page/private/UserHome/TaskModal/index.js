@@ -9,9 +9,8 @@ import {
     Title, InputTittle, ContainterInput, InputText,
     InputArea, ContainerInputSelection, DoneInput, DateInput, ContainerButtoms, Buttom
 } from "./Style"
+
 import BlockError from "../../../../utils/BlockError"
-
-
 import useApi from "../../../../utils/apiHook" 
 
 const initialState = { name: "", description: "", assigned: "", company: "", done: false }
@@ -65,10 +64,6 @@ export default function CreateTaskModal({ isOpen, eventClose }) {
         }
     }
 
-
-
-
-
     if (!isOpen) return null
 
     return createPortal(
@@ -76,8 +71,8 @@ export default function CreateTaskModal({ isOpen, eventClose }) {
             <form >
                 <TaskContainer>
                     <MarginContainer>
-
                         <Title>Portal Prueba</Title>
+                        
                         <ContainterInput>
                             <InputTittle>Name</InputTittle>
                             <InputText onKeyUp={handleSubmint} value={state.name} onChange={catchChange} name="name" placeholder="Task Title" />

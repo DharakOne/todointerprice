@@ -1,5 +1,5 @@
 @proxi=https://3000-teal-spider-53thcne1.ws-us17.gitpod.io
-@token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYzNTAwODk1OSwianRpIjoiY2JiZjE5MjEtODFkMS00MWE2LTk1ODItODA2Y2U1NWQ3YWFjIiwibmJmIjoxNjM1MDA4OTU5LCJ0eXBlIjoiYWNjZXNzIiwic3ViIjp7InVzZXJOYW1lIjoiSGVsaW9zIiwiZW1haWwiOiJqdW5pb3JAZ21haWwuY29tIiwiX2lkIjoiNjE2MWU1NTI2OTBkNzY0NDNlZTlkZmM1In0sImV4cCI6MTYzNTAwOTU1OX0.xx-ltFcVMSV0cYfhKqBwTNaZN3bnR8iXcW1m__XE3uk
+@token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYzNTc4NjI0OSwianRpIjoiMGVlNGYyY2YtYTM1ZS00YTcwLTlmMjQtMzRkZGU4OWNmZDMyIiwibmJmIjoxNjM1Nzg2MjQ5LCJ0eXBlIjoiYWNjZXNzIiwic3ViIjp7InVzZXJOYW1lIjoiSGVsaW9zIiwiZW1haWwiOiJqdW5pb3JAZ21haWwuY29tIiwiX2lkIjoiNjE2MWU1NTI2OTBkNzY0NDNlZTlkZmM1In0sImV4cCI6MTYzNTc5Mzg0OX0.HjwVtJMIrQRz-af3qM913eiSv0pA6iAYquOEdgbn7Z8
 ###
 POST  {{proxi}}/user/signIn HTTP/1.1
 content-type: application/json
@@ -16,4 +16,21 @@ Authorization: Bearer {{token}}
 {
     "numberActivate":1,
     "filter":{"name":""}
+}
+
+POST  {{proxi}}/task/getTask HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "numberActivate":1,
+    "filter":{"name":""}
+}
+
+POST  {{proxi}}/task/deleteTask HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "idTask":"617c2f313b0007b9f66ecabd",
 }
