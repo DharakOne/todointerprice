@@ -12,7 +12,6 @@ function UserHome(props) {
     })
 
     function handleTaskCreate() {
-        console.log("I passed to closeTask")
         setState({ ...state, isOpenCreate: !state.isOpenCreate })
     }
 
@@ -24,7 +23,7 @@ function UserHome(props) {
                     <CreateStyle onClick={handleTaskCreate}>+</CreateStyle>
                 </SecondBarContainer>
                 <TableTask />
-            </ContainerUserHome>
+            </ContainerUserHome> 
             <CreateTaskModal isOpen={state.isOpenCreate} eventClose={handleTaskCreate} />
         </Layout>
     )

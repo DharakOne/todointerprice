@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 
+import EdictTask from "./EdictModal"
+
 import { getFilterTasks } from "../../../../../redux/task/action"
 import TaskDescription from './TaskDescription'
 import { TaskContainer, TaskContainerMain, Typography, CheckInput, ToolContainer, IconRotate } from "./Style"
@@ -15,13 +17,22 @@ import Delete from "./Icons/Delete.svg"
 
 export default function TaskBar({ company, assigned, name, endDate, description, done, _id }) {
     const [open, setOpen] = useState(false)
+    const [waitRequest, setWaitRequest] = useState(false)
     const dispatch = useDispatch()
     const taskInformation = useSelector(state => state.task)
+    const checkReference = useRef()
+    const [isOpenEdict, setIsOpenEdict] = useState(false)
+    const countRef = useRef(0)
+
     function handleDeleteTask() {
-        console.log("Hhola click delete")
+        countRef.current++
+        console.log(countRef)
+        if (waitRequest == true) {
+            return
+        }
+        setWaitRequest(!waitRequest)
         axios({ method: "post", url: "task/deleteTask", data: { idTask: _id } }).then(
             (response) => {
-            console.log("Hhola click delete se envio y regreso")
 
                 let { filter } = taskInformation
 
@@ -37,9 +48,10 @@ export default function TaskBar({ company, assigned, name, endDate, description,
                 }
             }
         )
+        setWaitRequest(!waitRequest)
     }
     function handleCheck() {
-        axios({ method: "post", url: "task/check", data: { idTask: _id } }).then( 
+        axios({ method: "post", url: "task/check", data: { idTask: _id, done: !done } }).then(
             () => {
                 let { filter } = taskInformation
                 if (taskInformation.table.Tasks.length == 1 && taskInformation.table.numberActivate != 1) {
@@ -55,6 +67,10 @@ export default function TaskBar({ company, assigned, name, endDate, description,
             }
         )
     }
+
+    function handleEdictModal() {
+        setIsOpenEdict(!isOpenEdict)
+    }
     return (
         <TaskContainerMain>
             <TaskContainer>
@@ -63,17 +79,19 @@ export default function TaskBar({ company, assigned, name, endDate, description,
                 <Typography> {company}</Typography>
                 <Typography> {assigned}</Typography>
                 <Typography> {endDate}</Typography>
-                <CheckInput readOnly checked={done} onChange={handleCheck} />
+                <CheckInput ref={checkReference} readOnly checked={done} onChange={handleCheck} />
                 <ToolContainer>
                     <IconStyle cursor="pointer">
                         <Delete onClick={handleDeleteTask} />
                     </IconStyle>
                     <IconStyle cursor="pointer" >
-                        <Pen />
+                        <Pen onClick={handleEdictModal} />
                     </IconStyle>
                 </ToolContainer>
             </TaskContainer>
             <TaskDescription open={open} Name={name} Description={description} />
+            {isOpenEdict ?<EdictTask isOpen={isOpenEdict} eventClose={handleEdictModal} data={{ company, assigned, name, endDate, description, done, _id }} dateInfo={"ghgh"} />:null}
+            
         </TaskContainerMain>
     )
 }

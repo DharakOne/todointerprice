@@ -1,7 +1,7 @@
 from os import name
 from flask import request
 from marshmallow import ValidationError
-from bson.objectid import ObjectId 
+from bson.objectid import ObjectId
 import datetime
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from pymongo import DESCENDING, ASCENDING
@@ -83,11 +83,32 @@ def deleteTask():
     data = request.get_json()
     idTask=data["idTask"]
     _id=ObjectId(idTask)
-    task1=TaskDatabase.delete_one({"_id":_id,"idUser":userId})
-    print(task1)
+    TaskDatabase.delete_one({"_id":_id,"idUser":userId})
     return {"Task Was Delete":"sd"}
 
-@task_app.route("/task/check", methods=["POST"])
-@jwt_required()
+@task_app.route("/check", methods=["POST"])
+@jwt_required() 
 def checkTask():
-    return "hola"
+    current_user = get_jwt_identity()
+    userId = current_user['_id']
+    data = request.get_json()
+    done =data["done"]
+    idTask=data["idTask"]
+    _id=ObjectId(idTask)
+    newValue={"$set":{"done":done}}
+    TaskDatabase.update_one({"_id":_id,"idUser":userId},newValue)
+    return "It was updated."
+
+@task_app.route("/updateTask", methods=["POST"])
+@jwt_required()
+def updateTask():
+    current_user = get_jwt_identity()
+    userId = current_user['_id']
+    data = request.get_json()
+    print(data)
+    idTask=data["_id"]
+    _id=ObjectId(idTask)
+    newValue={"$set":{"company":data["company"], "assigned":data["assigned"], "name":data["name"],"endDate":data["endDate"], "description":data["description"], "done":data["done"]}}
+    jk=TaskDatabase.update_one({"_id":_id,"idUser":userId},newValue)
+    print(jk.acknowledged)
+    return " It was updated"

@@ -13,8 +13,9 @@
         "**/__pycache__": true,
         "**/**.pyc": true,
         "node_modules": true,
-        ".theia":true
+        ".theia":false
     },
     "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [ "--disable=C0103"],
     "python.envFile": "${workspaceFolder}/app/.env"
 } 

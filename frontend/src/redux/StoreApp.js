@@ -11,6 +11,6 @@ const StoreApp = createStore(
     combineReducers({
         user: UserReducer,
         task: TaskReducer
-    }),undefined,middlewareEnhancer)
+    }),undefined,composedEnhancers)
      
 export default StoreApp

@@ -1,4 +1,0 @@
-https://www.gitpod.io/docs/environment-variables/
-eval $(gp env -e)
-eval $(gp env -e foo=bar)
-gp env foo=bar

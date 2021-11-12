@@ -18,19 +18,12 @@ Authorization: Bearer {{token}}
     "filter":{"name":""}
 }
 
-POST  {{proxi}}/task/getTask HTTP/1.1
+###
+POST  {{proxi}}/task/check HTTP/1.1
 content-type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "numberActivate":1,
-    "filter":{"name":""}
-}
-
-POST  {{proxi}}/task/deleteTask HTTP/1.1
-content-type: application/json
-Authorization: Bearer {{token}}
-
-{
-    "idTask":"617c2f313b0007b9f66ecabd",
+    "idTask":"61745c929b08479773841b46",
+    "done":true
 }

@@ -1,6 +1,5 @@
 import React, {useEffect} from "react"
 import { useSelector, useDispatch } from "react-redux"
-
 import {getFilterTasks} from "../../../../../redux/task/action"
 
 
@@ -48,7 +47,6 @@ function TableTask() {
                     isMax={table.isMax}
                     isMin={table.isMin}
                 />}
-
         </Background>
     )
 }
