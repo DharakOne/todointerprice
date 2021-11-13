@@ -37,18 +37,25 @@ export default function TaskBar({ company, assigned, name, endDate, description,
                 let { filter } = taskInformation
 
                 if (taskInformation.table.Tasks.length == 1 && taskInformation.table.numberActivate != 1) {
-                    dispatch(getFilterTasks({
-                        numberActivate: taskInformation.table.numberActivate - 1,
-                        filter
-                    }))
+                    function delay() {
+                        dispatch(getFilterTasks({
+                            numberActivate: taskInformation.table.numberActivate - 1,
+                            filter
+                        }))
+                        delay()
+
+                    }
+
                 }
                 else {
-                    console.log(filter)
-                    dispatch(getFilterTasks({ numberActivate: taskInformation.table.numberActivate, filter }))
+                    function delay() {
+                        dispatch(getFilterTasks({ numberActivate: taskInformation.table.numberActivate, filter }))
+                    }
+                    delay()
+
                 }
             }
         )
-        setWaitRequest(!waitRequest)
     }
     function handleCheck() {
         axios({ method: "post", url: "task/check", data: { idTask: _id, done: !done } }).then(
@@ -90,8 +97,8 @@ export default function TaskBar({ company, assigned, name, endDate, description,
                 </ToolContainer>
             </TaskContainer>
             <TaskDescription open={open} Name={name} Description={description} />
-            {isOpenEdict ?<EdictTask isOpen={isOpenEdict} eventClose={handleEdictModal} data={{ company, assigned, name, endDate, description, done, _id }} dateInfo={"ghgh"} />:null}
-            
+            {isOpenEdict ? <EdictTask isOpen={isOpenEdict} eventClose={handleEdictModal} data={{ company, assigned, name, endDate, description, done, _id }} dateInfo={"ghgh"} /> : null}
+
         </TaskContainerMain>
     )
 }

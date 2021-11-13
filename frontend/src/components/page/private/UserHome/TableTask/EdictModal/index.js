@@ -1,9 +1,7 @@
 import React, { useState, useRef,useEffect } from "react"
 import { createPortal } from "react-dom"
 import { useDispatch } from "react-redux"
-
 import { getFilterTasks } from "../../../../../../redux/task/action"
-
 import {
     ContainerModal, TaskContainer, MarginContainer,
     Title, InputTittle, ContainterInput, InputText,
@@ -15,7 +13,6 @@ import useApi from "../../../../../utils/apiHook"
 
 const initialState = { name: "", description: "", assigned: "", company: "", done: false }
 
-
 export default function EdictTask({ eventClose,data }) {
     const dispatch= useDispatch()
     const [state, setState] = useState(initialState)
@@ -26,11 +23,11 @@ export default function EdictTask({ eventClose,data }) {
         let { company, assigned, name, endDate, description, done, _id }=data
         setState({ company, assigned, name, description, done, _id})
         endDate=endDate.replaceAll("/","-").replace(" ","T")
-        console.log(endDate)
-        endDate=endDate.slice(6,10)+endDate.slice(2,6)+endDate.slice(0,2)+endDate.slice(10,16)
-        console.log(endDate)
+        endDate=endDate.slice(6,10)+endDate.slice(2,6)+endDate.slice(0,2)+endDate.slice(10,endDate.length)
+        if (endDate.length==15){
+            endDate=endDate.slice(0,11)+"0"+endDate.slice(11,15)
+        }
         dateRef.current.value=endDate
-
     },[])
 
     function catchChange(event) {
@@ -63,7 +60,6 @@ export default function EdictTask({ eventClose,data }) {
             EndDate = new Date(EndDate)
             EndDate = EndDate.toISOString()
             const dataForm = { ...state, endDate: EndDate }
-            console.log(dataForm)
             await handeldEvent({ url: "task/updateTask", method: "post", config: { data: dataForm }})
             relay()
             handleCancel()

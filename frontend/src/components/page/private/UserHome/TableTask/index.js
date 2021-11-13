@@ -1,6 +1,6 @@
-import React, {useEffect} from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import {getFilterTasks} from "../../../../../redux/task/action"
+import { getFilterTasks } from "../../../../../redux/task/action"
 
 
 import TaskBar from "./TaskBar"
@@ -13,32 +13,58 @@ import {
 
 
 function TableTask() {
-    const { table,filter} = useSelector(state => state.task)
+    const { table, filter } = useSelector(state => state.task)
     const dispach = useDispatch()
+    const [modeSmall, setModeSmall] = useState(false)
+    const [loadResolution, setLoadResolution] = useState(false)
+    const count = useRef(0)
 
-    function upDateFilterOut (filter){
-        dispach(getFilterTasks({numberActivate:1, filter}))
+    function upDateFilterOut(filter) {
+        dispach(getFilterTasks({ numberActivate: 1, filter }))
     }
 
-    function changePageTask(numberActivate){
-        dispach(getFilterTasks({numberActivate,filter}))
+    function changePageTask(numberActivate) {
+        dispach(getFilterTasks({ numberActivate, filter }))
     }
+    const handleResizeWindow = () => {
+        count.current++
+        const condition = window.innerWidth <= 900
+        if (condition) {
+            setModeSmall(true)
+        }
+        if (!condition) {
+            setModeSmall(false)
+        }
+
+    }
+    useEffect(() => {
+        handleResizeWindow()
+        console.log("as")
+
+        window.addEventListener("resize", handleResizeWindow);
+        setLoadResolution(true)
+        return () => {
+            window.removeEventListener("resize", handleResizeWindow);
+        };
+    }, [])
 
     useEffect(() => {
-        dispach(getFilterTasks({numberActivate:1,filter:{name:""}}))
+        dispach(getFilterTasks({ numberActivate: 1, filter: { name: "" } }))
     }, [dispach])
 
     return (
         <Background>
+
             <SearchBar upDateFilterOut={upDateFilterOut} />
             <ContainerTable>
 
                 <BarTitle>
                     {[" ", "Name", "Company", "Assigned", "End Date", "Done", ""].map((e, index) => <Title key={index}> {e}</Title>)}
                 </BarTitle>
+
                 {table.Tasks.map((props, index) => <TaskBar key={index}  {...props} />)}
             </ContainerTable>
-            
+
             {table.Tasks.length > 0 &&
                 <TeethTab
                     numberActivate={table.numberActivate}

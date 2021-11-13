@@ -25,6 +25,11 @@ export const getFilterTasks = ({ numberActivate, filter }) => (dispach) => {
                 let date = Date.parse(task.endDate)
                 date = new Date(date)
                 date = date.toLocaleString()
+                if(date.length==18){
+                    date=date.slice(0,15)
+                } else {
+                    date=date.slice(0,16)
+                }
                 Tasks[i].endDate = date
             })
             const data = {
@@ -33,7 +38,6 @@ export const getFilterTasks = ({ numberActivate, filter }) => (dispach) => {
                 },
                 filter
             }
-            console.log(data)
             dispach(setDataTask(data))
         })
         .catch(error => console.log(error))

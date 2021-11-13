@@ -19,7 +19,7 @@ export default function CreateTaskModal({ isOpen, eventClose }) {
     const dispatch= useDispatch()
     const [state, setState] = useState(initialState)
     const dateRef = useRef(null)
-    const { waitAnswer, handeldEvent, errorRequest, setErrorRequest } = useApi(4000)
+    const { waitAnswer, handeldEvent, errorRequest, setErrorRequest } = useApi(1000)
 
 
     function catchChange(event) {
