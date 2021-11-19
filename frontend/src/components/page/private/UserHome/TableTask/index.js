@@ -1,16 +1,21 @@
 import React, { useEffect, useRef, useState } from "react"
+import Styled from "styled-components"
+
 import { useSelector, useDispatch } from "react-redux"
 import { getFilterTasks } from "../../../../../redux/task/action"
 
-
-import TaskBar from "./TaskBar"
 import TeethTab from "./TeethTab"
-import SearchBar from "./SerchBar"
+import ModeLarge from "./ModeLarge"
 
-import {
-    Background, BarTitle, Title, ContainerTable
-} from "./Style"
-
+export const Background = Styled.div`
+    width:100%;
+    background:white;
+    margin: 35px 0 77px; 
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:49px 0;
+`
 
 function TableTask() {
     const { table, filter } = useSelector(state => state.task)
@@ -18,10 +23,6 @@ function TableTask() {
     const [modeSmall, setModeSmall] = useState(false)
     const [loadResolution, setLoadResolution] = useState(false)
     const count = useRef(0)
-
-    function upDateFilterOut(filter) {
-        dispach(getFilterTasks({ numberActivate: 1, filter }))
-    }
 
     function changePageTask(numberActivate) {
         dispach(getFilterTasks({ numberActivate, filter }))
@@ -39,8 +40,6 @@ function TableTask() {
     }
     useEffect(() => {
         handleResizeWindow()
-        console.log("as")
-
         window.addEventListener("resize", handleResizeWindow);
         setLoadResolution(true)
         return () => {
@@ -53,17 +52,8 @@ function TableTask() {
     }, [dispach])
 
     return (
-        <Background>
-
-            <SearchBar upDateFilterOut={upDateFilterOut} />
-            <ContainerTable>
-
-                <BarTitle>
-                    {[" ", "Name", "Company", "Assigned", "End Date", "Done", ""].map((e, index) => <Title key={index}> {e}</Title>)}
-                </BarTitle>
-
-                {table.Tasks.map((props, index) => <TaskBar key={index}  {...props} />)}
-            </ContainerTable>
+        <Background> 
+            <ModeLarge Tasks={table.Tasks} />
 
             {table.Tasks.length > 0 &&
                 <TeethTab
@@ -76,5 +66,4 @@ function TableTask() {
         </Background>
     )
 }
-
 export default TableTask

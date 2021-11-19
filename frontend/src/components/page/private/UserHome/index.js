@@ -3,6 +3,7 @@ import Layout from "../../public/Layout"
 import { ContainerUserHome, Title, SecondBarContainer, CreateStyle } from "./UserStyle"
 import TableTask from "./TableTask"
 import CreateTaskModal from "./TaskModal"
+import SearchBar from "./SerchBar"
 
 
 
@@ -20,6 +21,7 @@ function UserHome(props) {
             <ContainerUserHome>
                 <SecondBarContainer>
                     <Title>Task</Title>
+                    <SearchBar/>
                     <CreateStyle onClick={handleTaskCreate}>+</CreateStyle>
                 </SecondBarContainer>
                 <TableTask />

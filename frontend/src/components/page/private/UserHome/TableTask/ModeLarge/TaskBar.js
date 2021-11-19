@@ -2,17 +2,17 @@ import React, { useState, useRef } from "react"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 
-import EdictTask from "./EdictModal"
+import EdictTask from "../EdictModal"
 
-import { getFilterTasks } from "../../../../../redux/task/action"
+import { getFilterTasks } from "../../../../../../redux/task/action"
 import TaskDescription from './TaskDescription'
 import { TaskContainer, TaskContainerMain, Typography, CheckInput, ToolContainer, IconRotate } from "./Style"
-import IconStyle from "../../../../utils/IconStyle"
+import IconStyle from "../../../../../utils/IconStyle"
 
 
-import ArrowRight from "./Icons/ArrowRight.svg"
-import Pen from "./Icons/Pen.svg"
-import Delete from "./Icons/Delete.svg"
+import ArrowRight from "../Icons/ArrowRight.svg"
+import Pen from "../Icons/Pen.svg"
+import Delete from "../Icons/Delete.svg"
 
 
 export default function TaskBar({ company, assigned, name, endDate, description, done, _id }) {

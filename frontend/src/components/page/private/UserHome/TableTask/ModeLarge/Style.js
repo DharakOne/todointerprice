@@ -1,16 +1,6 @@
 import Styled from "styled-components"
-import IconStyle from "../../../../utils/IconStyle"
+import IconStyle from "../../../../../utils/IconStyle"
 
-
-export const Background = Styled.div`
-    width:100%;
-    background:white;
-    margin: 35px 0 77px; 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:49px 0;
-`
 
 export const ContainerTable = Styled.div`
     display:flex;

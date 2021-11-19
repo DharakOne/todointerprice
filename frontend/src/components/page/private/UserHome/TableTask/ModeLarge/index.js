@@ -1,18 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import TaskBar from './TaskBar'
+import {
+    BarTitle, Title, ContainerTable
+} from "./Style"
 
-function ModeLarge() {
+export default function ModeLarge({Tasks}) {
+    useEffect(function(){
+        console.log(Tasks)
+    })
     return (
 
-        <React.Fragment>
-            <SearchBar upDateFilterOut={upDateFilterOut} />
             <ContainerTable>
-
                 <BarTitle>
                     {[" ", "Name", "Company", "Assigned", "End Date", "Done", ""].map((e, index) => <Title key={index}> {e}</Title>)}
                 </BarTitle>
-
-                {table.Tasks.map((props, index) => <TaskBar key={index}  {...props} />)}
+                {Tasks.map((props, index) => <TaskBar key={index}  {...props} />)}
             </ContainerTable>
-        </React.Fragment>
     )
 }
