@@ -5,9 +5,6 @@ import {
 } from "./Style"
 
 export default function ModeLarge({Tasks}) {
-    useEffect(function(){
-        console.log(Tasks)
-    })
     return (
 
             <ContainerTable>

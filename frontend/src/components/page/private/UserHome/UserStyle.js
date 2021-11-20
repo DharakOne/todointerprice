@@ -12,9 +12,11 @@ export const SecondBarContainer = Styled.div`
     justify-content:center;
     grid-template-columns: auto 0.7fr auto;
     margin: 35px auto 35px ;
-    grid-column-gap:10px;
+    grid-column-gap:17px;
     align-items: center;
-
+    @media (max-width: 920px) {
+    grid-template-columns: 0.7fr auto;
+    }
 `
 export const Title = Styled.label`
     font-family: Roboto;
@@ -25,6 +27,9 @@ export const Title = Styled.label`
     color: #000000;
     font-style: normal;
     margin-right:5%;
+    @media (max-width: 920px) {
+        display:none;
+    }
 `
 
 export const CreateStyle = Styled.div`

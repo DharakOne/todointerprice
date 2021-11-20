@@ -6,6 +6,7 @@ import { getFilterTasks } from "../../../../../redux/task/action"
 
 import TeethTab from "./TeethTab"
 import ModeLarge from "./ModeLarge"
+import ModeSmall from "./ModeSmall"
 
 export const Background = Styled.div`
     width:100%;
@@ -21,7 +22,7 @@ function TableTask() {
     const { table, filter } = useSelector(state => state.task)
     const dispach = useDispatch()
     const [modeSmall, setModeSmall] = useState(false)
-    const [loadResolution, setLoadResolution] = useState(false)
+    const [loadResolution, setLoadResolution] = useState(true)
     const count = useRef(0)
 
     function changePageTask(numberActivate) {
@@ -41,7 +42,7 @@ function TableTask() {
     useEffect(() => {
         handleResizeWindow()
         window.addEventListener("resize", handleResizeWindow);
-        setLoadResolution(true)
+        setLoadResolution(false)
         return () => {
             window.removeEventListener("resize", handleResizeWindow);
         };
@@ -53,7 +54,7 @@ function TableTask() {
 
     return (
         <Background> 
-            <ModeLarge Tasks={table.Tasks} />
+            {loadResolution ? null :modeSmall ? <ModeSmall Tasks={table.Tasks} /> : <ModeLarge Tasks={table.Tasks} />}
 
             {table.Tasks.length > 0 &&
                 <TeethTab
